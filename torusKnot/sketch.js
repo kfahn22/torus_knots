@@ -13,7 +13,7 @@
 let angle = 0;
 let beta = 0;
 let vectors = [];
-let p = 7;
+let p = 5;
 let q = 2;
 let r = 45;
 
