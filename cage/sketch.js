@@ -1,4 +1,4 @@
-// This sketch draws a torus knot using a shader.  
+// This sketch draws a case by intersection 3 tori.  
 // This version is a port of code from The Art of Code tutorial 
 // Torus Knots, Explained in ShaderToy
 
