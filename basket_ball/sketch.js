@@ -1,16 +1,13 @@
-// This sketch draws a torus knot using a shader.  
+// This sketch draws a case by intersection 3 tori.  
 // This version is a port of code from The Art of Code tutorial 
 // Torus Knots, Explained in ShaderToy
 
 // a shader variable
 let theShader;
-let shaders = [];
 
 function preload(){
   // load the shader
-  shaders[0] = loadShader('shader.vert', 'shader1.frag');
-  shaders[1] = loadShader('shader.vert', 'shader2.frag');
-  shaders[2] = loadShader('shader.vert', 'shader3.frag');
+  theShader = loadShader('shader.vert', 'shader.frag');
 }
 
 function setup() {
@@ -22,7 +19,7 @@ function setup() {
 
 function draw() {  
   background(0);
-  let theShader = shaders[1];
+
   // send resolution of sketch into shader
   theShader.setUniform('u_resolution', [width, height]);
   theShader.setUniform("iMouse", [mouseX, map(mouseY, 0, height, height, 0)]);

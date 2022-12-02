@@ -244,7 +244,7 @@ float wovenTorus2(vec3 pos) {
 }
 
 float GetDist( vec3 pos) {
-    return TorusKnot(pos);
+    return wovenTorus(pos);
 
 }
 
@@ -253,7 +253,7 @@ float RayMarch(vec3 ro, vec3 rd) {
     
     for(int i=0; i<MAX_STEPS; i++) {
     	vec3 p = ro + rd*dO;
-        float dS = TorusKnot(p);
+        float dS = wovenTorus(p);
         dO += dS;
         if(dO>MAX_DIST || abs(dS)<SURF_DIST) break;
     }
@@ -262,13 +262,13 @@ float RayMarch(vec3 ro, vec3 rd) {
 }
 
 vec3 GetNormal(vec3 p) {
-	float d = GetDist(p);
+	float d = wovenTorus(p);
     vec2 e = vec2(.001, 0);
     
     vec3 n = d - vec3(
-        GetDist(p-e.xyy),
-        GetDist(p-e.yxy),
-        GetDist(p-e.yyx));
+        wovenTorus(p-e.xyy),
+        wovenTorus(p-e.yxy),
+        wovenTorus(p-e.yyx));
     
     return normalize(n);
 }
@@ -301,9 +301,9 @@ void main()
     
    // Last parameter--lens of camera
    // Increase to zoom in
-    vec3 rd = GetRayDir(uv, ro, vec3(0,0.,0), 0.5); 
+    vec3 rd = GetRayDir(uv, ro, vec3(0,0.,0), 1.25); 
     
-    //col += Bg(rd);
+    col = colorGradient(uv, TEAL, ORANGE, 0.5);
 
     float d = RayMarch(ro, rd);
 
@@ -314,7 +314,7 @@ void main()
         
         float spec = pow(max(0.0, r.y), 30.); // add specular highlight
         float dif = dot(n, normalize(vec3(1,2,3)))*.5+.5;
-        col = mix(GOLD, vec3(dif), 0.5)+spec;
+        col = mix(PURPLE, vec3(dif), 0.25)+spec;
     }
     
     col = pow(col, vec3(.4545));	// gamma correction

@@ -110,6 +110,11 @@ mat2 Rot(float a) {
     return mat2(c, -s, s, c);
 }
 
+float sdSphere( vec3 p, float s )
+{
+  return length(p)-s;
+}
+
 // function to extract polar coordinates
 // from Daniel Shiffman
 vec3 Spherical( in vec3 pos) 
@@ -140,9 +145,10 @@ float GetDist(vec3 pos) {
     // Slice of the torus we are looking at 
     // Revolving a 2d circle 
     //vec2 cp = vec2(length(pos.xz)-r2, pos.y);//-r2);
-    vec2 cp1 = vec2(length(pos.xz)-r1, pos.y);//-r2);
-    vec2 cp2 = vec2(length(pos.yz)-r1, pos.x);//-r2);
-    vec2 cp3 = vec2(length(pos.xy)-r1, pos.z);//-r2);
+    float db = 0.3; // can add another torus by subtracting by db
+    vec2 cp1 = vec2(length(pos.xz)-r1, pos.y) - db;//-r2);
+    vec2 cp2 = vec2(length(pos.yz)-r1, pos.x) - db;//-r2);
+    vec2 cp3 = vec2(length(pos.xy)-r1, pos.z) - db;//-r2);
     // multiply angle by whole number get one long knot
     // multiply by non-whole number get interconnected tori
     float p = 1.0;
@@ -152,17 +158,18 @@ float GetDist(vec3 pos) {
     cp1 *= Rot(a*(p/q));  
     cp2 *= Rot(a*(p/q));  
     cp3 *= Rot(a*(p/q));  
-    cp1.x = abs(cp1.x+wr)-0.00;
-    cp2.y = abs(cp2.y+wr)-0.00;
-    cp3.y = abs(cp3.y+wr)-0.00;
+    cp1.x = abs(cp1.x+wr)-0.0;
+    cp2.y = abs(cp2.y+wr)-0.0;
+    cp3.y = abs(cp3.y+wr)-0.0;
    // cp = abs(cp) - 0.5;
     // get two tori by adding & subtraction by a vec2
    // float d = min(length(cp1-vec2(0.0, 0.4)), length(cp1-vec2(0.0, -0.4)))- r2;
-    float d1 = length(cp1-vec2(0.0, 0.01))-r2;
-    float d2 = length(cp2-vec2(0.0, 0.01))-r2;
-    float d3 = length(cp3-vec2(0.0, 0.01))-r2;
-    d = min(d3, min(d1,d2));
-  
+    float d1 = length(cp1-vec2(0.0, 0.0))-0.2;
+    float d2 = length(cp2-vec2(0.0, 0.0))-0.1;
+    float d3 = length(cp3-vec2(0.0, 0.0))-0.05;
+    d = min(d3, min(d1,d2)); // get cage
+    //d = mix(d3, min(d1,d2), 0.25);
+    // d = min(d, sdSphere( pos, 1.25));
     return d*.9;
 }
 
@@ -212,7 +219,7 @@ void main()
 {
     vec2 uv = (gl_FragCoord.xy - .5*u_resolution.xy)/u_resolution.y;
 	vec2 m = iMouse.xy/u_resolution.xy;
-    vec3 col = vec3(ORANGE);
+    vec3 col = colorGradient(uv, PURPLE, BLUE, 0.5);
     vec3 ro = vec3(0, 3, -3);
     ro.yz *= Rot(-m.y*3.14+1.);
     ro.xz *= Rot(-m.x*6.2831);
@@ -230,11 +237,12 @@ void main()
         vec3 n = GetNormal(p);
         vec3 r = reflect(rd, n);
         
-        float spec = pow(max(0.0, r.y), 30.); // add specular highlight
+        float spec = pow(max(0.0, r.y), 10.); // add specular highlight
         float dif = dot(n, normalize(vec3(1,2,3)))*.5+.5;
-        col = mix(PURPLE, vec3(dif), 0.5)+spec;
+        
+       col = mix(TEAL, vec3(dif), 0.1)+spec;
     }
-    
+   
     col = pow(col, vec3(.4545));	// gamma correction
     
     gl_FragColor = vec4(col,1.0);
