@@ -8,9 +8,8 @@ let shaders = [];
 
 function preload(){
   // load the shader
-  shaders[0] = loadShader('shader.vert', 'shader1.frag');
-  shaders[1] = loadShader('shader.vert', 'shader2.frag');
-  shaders[2] = loadShader('shader.vert', 'shader3.frag');
+  theShader = loadShader('shader.vert', 'shader.frag');
+  
 }
 
 function setup() {
@@ -22,7 +21,7 @@ function setup() {
 
 function draw() {  
   background(0);
-  let theShader = shaders[0];
+  
   // send resolution of sketch into shader
   theShader.setUniform('u_resolution', [width, height]);
   theShader.setUniform("iMouse", [mouseX, map(mouseY, 0, height, height, 0)]);
