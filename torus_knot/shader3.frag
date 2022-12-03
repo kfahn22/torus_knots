@@ -28,7 +28,6 @@ uniform float iFrame;
 #define T iTime
 #define PI 3.14159
 
-
 #define PURPLE vec3(146,83,161) / 255.
 #define RED vec3(218, 18, 14) / 255.
 #define ORANGE vec3(248,158,79) / 255.
@@ -54,92 +53,27 @@ vec3 colXYZ( vec3 col1, vec3 col2, vec3 col3, vec3 n)
        return col;
 }
 
+// Function to create background color based on uv.y
 vec3 colorGradient(vec2 uv, vec3 col1, vec3 col2, float m) {
   float k = uv.y*m + m;
   vec3 col = mix(col1, col2, k);
   return col;
 }  
 
+// Function to create a background color based on ray direction
+vec3 Bg(vec3 rd) {
+    float k = rd.y*0.5+ 0.5;
+    vec3 col = mix(PURPLE, TEAL, 0.8);
+    return col;
+}
+
 float N21( vec2 p) {
     return fract( sin(p.x*100. + p.y*6574.)*5674. );
 }
 
-float Hash21(vec2 p) {
-    p = fract(p*vec2(345.567, 123.45));
-    p *= dot(p, p*456.75);
-    return fract(p.x * p.y);
-}
-
-float SmoothNoise(vec2 uv) {
-   // lv goes from 0,1 inside each grid
-   // check out interpolation for dummies
-    vec2 lv = fract(uv);
-   
-   //vec2 lv = smoothstep(0., 1., fract(uv*10.));  // create grid of boxes 
-    vec2 id = floor(uv); // find id of each of the boxes
-     lv = lv*lv*(3.-2.*lv); 
-    
-    // get noise values for each of the corners
-    // Use mix function to join together
-    float bl = N21(id);
-    float br = N21(id+vec2(1,0));
-    float b = mix (bl, br, lv.x);
-    
-    
-    float tl = N21(id + vec2(0,1));
-    float tr = N21(id+vec2(1,1));
-    float t = mix (tl, tr, lv.x);
-    
-    return mix(b, t, lv.y);
-}
-
-float SmoothNoise2 (vec2 uv) {
-   float c = SmoothNoise(uv*4.);
-     // Layer(or octave) of noise
-    // Double frequency of noise; half the amplitude
-    c += SmoothNoise(uv*8.)*.5;
-    c += SmoothNoise(uv*16.)*.25;
-    c += SmoothNoise(uv*32.)*.125;
-    c += SmoothNoise(uv*64.)*.0625;
-    
-    return c/ 2.;  // have to normalize or could go past 1
-  
-}
 mat2 Rot(float a) {
     float s=sin(a), c=cos(a);
     return mat2(c, -s, s, c);
-}
-
-// function to extract polar coordinates
-// from Daniel Shiffman
-vec3 Spherical( in vec3 pos) 
-{
-   float r = sqrt(pos.x*pos.x + pos.y*pos.y + pos.z*pos.z);
-   float theta = atan( sqrt(pos.x*pos.x + pos.y*pos.y), pos.z);
-   float phi = atan(pos.y, pos.x);
-   vec3 w = vec3(r, theta, phi);
-   return w;
-}
-
-float Knot( vec3 p ) {
-   float beta = 0.01; // beta < PI
-   float dd = 0.0;
-   float d;
-   for (int i = 0; i < 4; i ++)
-      {
-      vec3 offset;
-      float r = 0.01 * (0.8 + 1.6 * sin(6.0 * beta));
-      float theta = 2.0 * beta;
-      float phi = 0.6 * PI * sin(12.0 * beta);
-      vec3 w = vec3(r, theta, phi);
-      offset.x = r * cos(phi) * cos(theta);
-      offset.y = r * cos(phi) * sin(theta);
-      offset.z = r * sin(phi);
-      d = length(p)-0.05;
-      dd = max(dd, d);
-      beta += 0.1;
-      }
-   return dd;
 }
 
 float sdBox(vec2 p, vec2 s) {
@@ -147,42 +81,39 @@ float sdBox(vec2 p, vec2 s) {
     return length(max(p, 0.0)) + min(max(p.x, p.y), 0.0);
 }
 
+// Creates a wreath like shape with two inter-twined torus knots
 float GetDist(vec3 pos) {
     //p.xz *= Rot(iTime*.1);
     // torus
-    float a = atan(pos.x, pos.z);
-
-    float r1 = 1.0;
-    float r2 = 0.5;
+   // pos = abs(pos);
+    
+    float d, d1, d2;
+    float r1 = 1.;
+    float r2 = 0.21;
+    float va = 0.00;
     // Slice of the torus we are looking at 
     // Revolving a 2d circle 
+    float a = atan(pos.x, pos.z);
     vec2 cp = vec2(length(pos.xz)-r1, pos.y);
-    vec2 cp2 = cp;
+    vec2 cp1 = vec2(length(pos.xz)-r1, pos.y- va);
     // multiply angle by whole number get one long knot
     // multiply by non-whole number get interconnected tori
-    float p = 5.0;
+    float p = 7.0;
     float q = 2.0;
     // (3,2) trefoil knot, (5,2) Solomon's seal knot, 
-    cp *= Rot(a*(3./2.));  
-    cp2 *= Rot(a*(5./2.));  
-    cp.y = abs(cp.y)-0.1;
-    cp2.y = abs(cp2.y)- 0.1;
-   // cp = abs(cp) - 0.5;
-    // get two tori by adding & subtraction by a vec2
-   // float d = min(length(cp1-vec2(0.0, 0.4)), length(cp1-vec2(0.0, -0.4)))- r2;
-    // float d = length(cp- vec2(0.0, 0.0))-0.4;
-    // float d2 = length(cp2)-0.1;
-   // d = min(d,d2);
-   //float d2 = length(cp2- vec2(0.0, 0.0))-r2;
-   //d = mix(d,d2, 0.5) - 0.1;
+    cp *= Rot(a*(p/q));  
+    cp1 *= Rot(a*((p + 4.)/q));  
+    cp.y = abs(cp.y)- 0.4; // if subtract by 0.0 get a torus
+    cp1.y = abs(cp1.y)- 0.4;
+   
     // create ribbon like efect
     // multiply times sin(a)*0.5 + 0.5 to vary radius of torus 
-    float d = sdBox(cp, vec2(0.11, 1.0*(sin(a)*0.5+ 0.5))) - 0.11; // create a ribbon-like effect
-    float d2 = sdBox(cp2, vec2(0.049, 1.0*(sin(a)*0.5 + 0.5))) - 0.049; // create a ribbon-like effect
-   
-    d = mix(d, d2, 0.5);
-    //return d*0.7; // adjustment to fix broken distance function
-    return d;
+    d1 = sdBox(cp, vec2(0.21, 0.21*(sin(a)*0.0 + 0.0))) - r2; // create a ribbon-like effect
+    d2 = sdBox(cp1, vec2(0.11, 0.11*(sin(a)*0.0 + 0.0))) - 0.11; // create a ribbon-like effect
+    // d = mix(d1,d2, 0.25);
+    d = min(d1,d2);
+
+    return d*0.8;
 }
 
 float RayMarch(vec3 ro, vec3 rd) {
@@ -220,28 +151,22 @@ vec3 GetRayDir(vec2 uv, vec3 p, vec3 l, float z) {
     return d;
 }
 
-// Function to create a nice background color
-vec3 Bg(vec3 rd) {
-    float k = rd.y*0.5+ 0.5;
-    vec3 col = mix(RED, GREEN, 0.8);
-    return col;
-}
-
 void main()
 {
     vec2 uv = (gl_FragCoord.xy - .5*u_resolution.xy)/u_resolution.y;
 	vec2 m = iMouse.xy/u_resolution.xy;
-    vec3 col = vec3(ORANGE);
+    vec3 col = vec3(0);
     vec3 ro = vec3(0, 3, -3);
     ro.yz *= Rot(-m.y*3.14+1.);
     ro.xz *= Rot(-m.x*6.2831);
     
    // Last parameter--lens of camera
    // Increase to zoom in
-    vec3 rd = GetRayDir(uv, ro, vec3(0,0.,0), 1.5); 
+    vec3 rd = GetRayDir(uv, ro, vec3(0,0.,0), 1.); 
     
     //col += Bg(rd);
-
+     col += colorGradient(uv, PURPLE, TEAL, 0.35);
+    //col += colorGradient(uv, vec3(0), RED, 0.75);
     float d = RayMarch(ro, rd);
 
     if(d<MAX_DIST) {
@@ -251,7 +176,8 @@ void main()
         
         float spec = pow(max(0.0, r.y), 30.); // add specular highlight
         float dif = dot(n, normalize(vec3(1,2,3)))*.5+.5;
-        col = mix(PURPLE, vec3(dif), 0.5)+spec;
+        col = mix(TEAL, vec3(dif), 0.15)+spec;
+        //col = mix(GREEN, vec3(dif), 0.15)+spec;
     }
     
     col = pow(col, vec3(.4545));	// gamma correction

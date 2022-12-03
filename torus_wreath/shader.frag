@@ -92,7 +92,7 @@ float GetDist(vec3 pos) {
     
     float d, d1, d2;
     float r1 = 1.;
-    float r2 = 0.18;
+    float r2 = 0.21;
     float va = 0.00;
     // Slice of the torus we are looking at 
     // Revolving a 2d circle 
@@ -113,7 +113,7 @@ float GetDist(vec3 pos) {
     // d2 = length(cp1- vec2(0.0, 0.0))-r2+0.02;
     // create ribbon like efect
     // multiply times sin(a)*0.5 + 0.5 to vary radius of torus 
-    d1 = sdBox(cp, vec2(0.21, 0.21*(sin(a)*0.0 + 0.0))) - .21; // create a ribbon-like effect
+    d1 = sdBox(cp, vec2(0.21, 0.21*(sin(a)*0.0 + 0.0))) - r2; // create a ribbon-like effect
     d2 = sdBox(cp1, vec2(0.11, 0.11*(sin(a)*0.0 + 0.0))) - .11; // create a ribbon-like effect
     // d = mix(d1,d2, 0.25);
     d = min(d1,d2);

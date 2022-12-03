@@ -64,47 +64,6 @@ float N21( vec2 p) {
     return fract( sin(p.x*100. + p.y*6574.)*5674. );
 }
 
-float Hash21(vec2 p) {
-    p = fract(p*vec2(345.567, 123.45));
-    p *= dot(p, p*456.75);
-    return fract(p.x * p.y);
-}
-
-float SmoothNoise(vec2 uv) {
-   // lv goes from 0,1 inside each grid
-   // check out interpolation for dummies
-    vec2 lv = fract(uv);
-   
-   //vec2 lv = smoothstep(0., 1., fract(uv*10.));  // create grid of boxes 
-    vec2 id = floor(uv); // find id of each of the boxes
-     lv = lv*lv*(3.-2.*lv); 
-    
-    // get noise values for each of the corners
-    // Use mix function to join together
-    float bl = N21(id);
-    float br = N21(id+vec2(1,0));
-    float b = mix (bl, br, lv.x);
-    
-    
-    float tl = N21(id + vec2(0,1));
-    float tr = N21(id+vec2(1,1));
-    float t = mix (tl, tr, lv.x);
-    
-    return mix(b, t, lv.y);
-}
-
-float SmoothNoise2 (vec2 uv) {
-   float c = SmoothNoise(uv*4.);
-     // Layer(or octave) of noise
-    // Double frequency of noise; half the amplitude
-    c += SmoothNoise(uv*8.)*.5;
-    c += SmoothNoise(uv*16.)*.25;
-    c += SmoothNoise(uv*32.)*.125;
-    c += SmoothNoise(uv*64.)*.0625;
-    
-    return c/ 2.;  // have to normalize or could go past 1
-  
-}
 mat2 Rot(float a) {
     float s=sin(a), c=cos(a);
     return mat2(c, -s, s, c);
@@ -147,38 +106,6 @@ float sdBox(vec2 p, vec2 s) {
     return length(max(p, 0.0)) + min(max(p.x, p.y), 0.0);
 }
 
-float TorusKnot(vec3 pos) {
-    //p.xz *= Rot(iTime*.1);
-    // torus
-    //pos = abs(pos);
-    float a = atan(pos.x, pos.z);
-   
-    float r1 = 1.0;
-    float r2 = 0.1;
-    float va = 0.00;
-    // Slice of the torus we are looking at 
-    // Revolving a 2d circle 
-    vec2 cp = vec2(length(pos.xz)-r1, pos.y- va);
-    vec2 cp1 = cp;
-    // multiply angle by whole number get one long knot
-    // multiply by non-whole number get interconnected tori
-    float p = 3.0;
-    float q = 1.0;
-    // (3,2) trefoil knot, (5,2) Solomon's seal knot, 
-    cp *= Rot(a*(3./2.));  
-    cp1 *= Rot(a*(5./1.));  
-    cp.y = abs(cp.y)- 0.2;
-    cp1.y = abs(cp1.y)- 0.1;
-   //cp = abs(cp) - 0.5;
-   float d = length(cp- vec2(0.0, 0.0))-0.20;
-   float d1 = length(cp1- vec2(0.0, 0.0))-0.25;
-    // create ribbon like efect
-    // multiply times sin(a)*0.5 + 0.5 to vary radius of torus 
-    //d = sdBox(cp, vec2(0.15, 0.2*(sin(a)*0.5 + 0.5))) - 0.15; // create a ribbon-like effect
-   
-    return d;
-}
-
 float wovenTorus(vec3 pos) {
     //p.xz *= Rot(iTime*.1);
     // torus
@@ -202,7 +129,7 @@ float wovenTorus(vec3 pos) {
     cp.y = abs(cp.y)- 0.2;
    
    // cp = abs(cp) - 0.5;
-   float d = length(cp- vec2(0.0, 0.0))-0.25;
+   float d = length(cp- vec2(0.0, 0.0))-0.4;
    
     // create ribbon like efect
     // multiply times sin(a)*0.5 + 0.5 to vary radius of torus 
@@ -238,7 +165,7 @@ float wovenTorus2(vec3 pos) {
    
     // create ribbon like efect
     // multiply times sin(a)*0.5 + 0.5 to vary radius of torus 
-    float d = sdBox(cp, vec2(0.15, 0.2*(sin(a)*0.5 + 0.5))) - 0.15; // create a ribbon-like effect
+    float d = sdBox(cp, vec2(0.15, 0.2*(sin(a)*0.5 + 0.5))) - 0.125; // create a ribbon-like effect
    
     return d;
 }
@@ -301,7 +228,7 @@ void main()
     
    // Last parameter--lens of camera
    // Increase to zoom in
-    vec3 rd = GetRayDir(uv, ro, vec3(0,0.,0), 1.25); 
+    vec3 rd = GetRayDir(uv, ro, vec3(0,0.,0), 1.0); 
     
     col = colorGradient(uv, TEAL, ORANGE, 0.5);
 
@@ -314,7 +241,7 @@ void main()
         
         float spec = pow(max(0.0, r.y), 30.); // add specular highlight
         float dif = dot(n, normalize(vec3(1,2,3)))*.5+.5;
-        col = mix(PURPLE, vec3(dif), 0.25)+spec;
+        col = mix(PURPLE, vec3(dif), 0.15)+spec;
     }
     
     col = pow(col, vec3(.4545));	// gamma correction
