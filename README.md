@@ -14,8 +14,8 @@ I have used Daniel's code, but I have substituted the following equations to cal
 
 `let phi = p * beta;`  
 `let theta = q * beta;`  
-`x = r * cos(theta) * (sc + cos(phi));`
-`y = r * sin(theta) * (sc + cos(phi));`
+`x = r * cos(theta) * (sc + cos(phi));`  
+`y = r * sin(theta) * (sc + cos(phi));`  
  `z = r * sin(phi);`
 
 (8,9) torus knot 
