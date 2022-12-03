@@ -12,11 +12,11 @@ Daniel Shiffman renders a complex 3D knot in his [3D knot coding challenge](http
 
 I have used Daniel's code, but I have substituted the following equations to calculate the cartesian coordinates. Equations from Lee Stemkoski at [Parameterized Knots](https://home.adelphi.edu/~stemkoski/knotgallery/). 
 
-`let phi = p * beta;
- let theta = q * beta;
- x = r * cos(theta) * (sc + cos(phi));
-    y = r * sin(theta) * (sc + cos(phi));
-    z = r * sin(phi);
+`let phi = p * beta;  
+ let theta = q * beta;  
+ x = r * cos(theta) * (sc + cos(phi));  
+ y = r * sin(theta) * (sc + cos(phi));  
+ z = r * sin(phi);
 `
 
 (8,9) torus knot 
