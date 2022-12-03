@@ -23,7 +23,7 @@ I have used Daniel's code, but I have substituted the following equations to cal
     margin-left: auto;
     margin-right: auto;" width="800" height="450">
 
-[P5 sketch](https://editor.p5js.org/kfahn/sketches/gKqXNfljn)  
+[Animated torus knot](https://editor.p5js.org/kfahn/sketches/gKqXNfljn)  
 [Code](https://github.com/kfahn22/torus_knots/tree/main/torusKnot)
 
 I have also rendered the torus knot with a shader in P5.js. The Art of Code's YouTube tutorial [Torus Knots explained!](https://www.youtube.com/watch?v=2dzJZx0yngg) was very helpful in explaining how to render a torus knot in shadertoy, which I ported to P5.js.  I have three different versions, which are sequentially loaded.
