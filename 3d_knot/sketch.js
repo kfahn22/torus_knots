@@ -21,14 +21,12 @@ let vectors = [];
 let beta = 0;
 
 function setup() {
-    knot = createCanvas(800, 450, WEBGL);
-    frameRate(1/2);
+    createCanvas(800, 450, WEBGL);
 }
 
 function draw() {
     background('#0B6A88');
-    //texture(knot);
-    //rotateY(angle);
+    rotateY(angle);
     angle += 0.03;
 
     let r = 100 * (0.8 + 1.2 * sin(6.0 * beta));
@@ -45,7 +43,7 @@ function draw() {
 
     noFill();
     //stroke(255);
-    strokeWeight(8);
+    strokeWeight(4);
     beginShape();
     for (let i = 0; i < vectors.length; i++) {
         let v = vectors[i];

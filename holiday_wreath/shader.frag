@@ -120,9 +120,10 @@ float GetDist(vec3 pos) {
     // d2 = sdBox(cp1, vec2(0.11, 0.11*(sin(a)*0.0 + 0.0))) - .11; // create a ribbon-like effect
     // d = mix(d1,d2, 0.25);
     //d = min(d1,d2);
+    // for decorations
     float d3 = sdSphere(pos - vec3(0.45, 0.45, 0.45), 0.07);
     float d4 = sdSphere(pos - vec3(0.4, 0.4, 0.45), 0.07);
-    float d5 = sdSphere(pos - vec3(0.38, 0.38, 0.40), 0.07);
+    float d5 = sdSphere(pos - vec3(0.38, 0.40, 0.40), 0.07); // good
     float d6 = sdSphere(pos - vec3(0.95, 0.40, 0.22), 0.06); //good
     d = min(d1, d5);
     return d*0.8;
