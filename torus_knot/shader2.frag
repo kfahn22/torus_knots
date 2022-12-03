@@ -10,6 +10,7 @@
 // The MIT License
 // YouTube: youtube.com/TheArtOfCodeIsCool
 
+
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -69,37 +70,6 @@ mat2 Rot(float a) {
     return mat2(c, -s, s, c);
 }
 
-// function to extract polar coordinates
-// from Daniel Shiffman
-vec3 Spherical( in vec3 pos) 
-{
-   float r = sqrt(pos.x*pos.x + pos.y*pos.y + pos.z*pos.z);
-   float theta = atan( sqrt(pos.x*pos.x + pos.y*pos.y), pos.z);
-   float phi = atan(pos.y, pos.x);
-   vec3 w = vec3(r, theta, phi);
-   return w;
-}
-
-float Knot( vec3 p ) {
-   float beta = 0.01; // beta < PI
-   float dd = 0.0;
-   float d;
-   for (int i = 0; i < 4; i ++)
-      {
-      vec3 offset;
-      float r = 0.01 * (0.8 + 1.6 * sin(6.0 * beta));
-      float theta = 2.0 * beta;
-      float phi = 0.6 * PI * sin(12.0 * beta);
-      vec3 w = vec3(r, theta, phi);
-      offset.x = r * cos(phi) * cos(theta);
-      offset.y = r * cos(phi) * sin(theta);
-      offset.z = r * sin(phi);
-      d = length(p)-0.05;
-      dd = max(dd, d);
-      beta += 0.1;
-      }
-   return dd;
-}
 
 float sdBox(vec2 p, vec2 s) {
     p = abs(p) - s;
@@ -125,16 +95,10 @@ float wovenTorus(vec3 pos) {
     float q = 1.0;
     // (3,2) trefoil knot, (5,2) Solomon's seal knot, 
     cp *= Rot(a*(p/q));  
-    
     cp.y = abs(cp.y)- 0.2;
    
    // cp = abs(cp) - 0.5;
-   float d = length(cp- vec2(0.0, 0.0))-0.4;
-   
-    // create ribbon like efect
-    // multiply times sin(a)*0.5 + 0.5 to vary radius of torus 
-    //float d = sdBox(cp, vec2(0.15, 0.2*(sin(a)*0.5 + 0.5))) - 0.15; // create a ribbon-like effect
-   
+    float d = length(cp- vec2(0.0, 0.0))-0.4;
     return d;
 }
 

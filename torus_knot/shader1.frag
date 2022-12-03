@@ -1,5 +1,5 @@
 // Code ported from The Art of Code Tutorial
-// Torus Knots Explained 
+// Torus Knots explained !
 // 
 // YouTube: youtube.com/TheArtOfCodeIsCool
 // Ray marching starting point
@@ -61,51 +61,6 @@ vec3 colorGradient(vec2 uv, vec3 col1, vec3 col2, float m) {
   return col;
 }  
 
-float N21( vec2 p) {
-    return fract( sin(p.x*100. + p.y*6574.)*5674. );
-}
-
-float Hash21(vec2 p) {
-    p = fract(p*vec2(345.567, 123.45));
-    p *= dot(p, p*456.75);
-    return fract(p.x * p.y);
-}
-
-float SmoothNoise(vec2 uv) {
-   // lv goes from 0,1 inside each grid
-   // check out interpolation for dummies
-    vec2 lv = fract(uv);
-   
-   //vec2 lv = smoothstep(0., 1., fract(uv*10.));  // create grid of boxes 
-    vec2 id = floor(uv); // find id of each of the boxes
-     lv = lv*lv*(3.-2.*lv); 
-    
-    // get noise values for each of the corners
-    // Use mix function to join together
-    float bl = N21(id);
-    float br = N21(id+vec2(1,0));
-    float b = mix (bl, br, lv.x);
-    
-    
-    float tl = N21(id + vec2(0,1));
-    float tr = N21(id+vec2(1,1));
-    float t = mix (tl, tr, lv.x);
-    
-    return mix(b, t, lv.y);
-}
-
-float SmoothNoise2 (vec2 uv) {
-   float c = SmoothNoise(uv*4.);
-     // Layer(or octave) of noise
-    // Double frequency of noise; half the amplitude
-    c += SmoothNoise(uv*8.)*.5;
-    c += SmoothNoise(uv*16.)*.25;
-    c += SmoothNoise(uv*32.)*.125;
-    c += SmoothNoise(uv*64.)*.0625;
-    
-    return c/ 2.;  // have to normalize or could go past 1
-  
-}
 mat2 Rot(float a) {
     float s=sin(a), c=cos(a);
     return mat2(c, -s, s, c);
@@ -118,28 +73,29 @@ float sdBox(vec2 p, vec2 s) {
 
 float GetDist(vec3 pos) {
     // torus
+    float d;
     float r1 = 1.0;
     float r2 = 0.15;
     // Slice of the torus we are looking at 
     // Revolving a 2d circle 
-    vec2 cp = vec2(length(pos.xz)-r1, pos.y);
+    vec2 cp = vec2(length(pos.xz)-r1, pos.y); 
     float a = atan(pos.x, pos.z);
+
     // multiply angle by whole number get one long knot
     // multiply by non-whole number get interconnected tori
+    // (5,2) Solomon's seal knot
     float p = 5.0;
     float q = 2.0;
-    // (3,2) trefoil knot, (5,2) Solomon's seal knot, 
     cp *= Rot(a*(p/q));  
     cp.y = abs(cp.y)- 0.2;
    
     // get two tori by adding & subtraction by a vec2
     //float d = min(length(cp1-vec2(0.0, 0.4)), length(cp1-vec2(0.0, -0.4)))- r2;
-    float d = length(cp- vec2(0.0, 0.0))-r2;
+    //float d = length(cp- vec2(0.0, 0.0))-r2;
     
     // create ribbon like efect
     // multiply times sin(a)*0.5 + 0.5 to vary radius of torus 
     d = sdBox(cp, vec2(0.1, 0.2*(sin(a)*0.0 + 0.0))) - 0.1; // create a ribbon-like effect
-    
     return d;
 }
 
