@@ -10,9 +10,6 @@
 // The MIT License
 // YouTube: youtube.com/TheArtOfCodeIsCool
 
-
-// Solomon's Seal
-
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -33,11 +30,13 @@ uniform float iFrame;
 
 
 #define PURPLE vec3(146,83,161) / 255.
-#define RED vec3(191, 18, 97) / 255.
+#define RED vec3(218, 18, 14) / 255.
 #define ORANGE vec3(248,158,79) / 255.
 #define BLUE vec3(118, 212, 229) / 255.
 #define TEAL vec3(11, 106, 136) / 255.
-#define FUSHIA vec3(236,1,90) / 255.
+#define GREEN vec3(36,87,4) / 255.
+#define GREY vec3(164,167,162) / 255.
+#define GOLD vec3(181, 130, 0) /255.
 
 // Function to add color to shape using x,y,z dimensions
 vec3 colXYZ( vec3 col1, vec3 col2, vec3 col3, vec3 n)
@@ -55,22 +54,23 @@ vec3 colXYZ( vec3 col1, vec3 col2, vec3 col3, vec3 n)
        return col;
 }
 
+// Function to create background color based on uv.y
 vec3 colorGradient(vec2 uv, vec3 col1, vec3 col2, float m) {
   float k = uv.y*m + m;
   vec3 col = mix(col1, col2, k);
   return col;
 }  
 
+// Function to create a background color based on ray direction
+vec3 Bg(vec3 rd) {
+    float k = rd.y*0.5+ 0.5;
+    vec3 col = mix(PURPLE, TEAL, 0.8);
+    return col;
+}
+
 float N21( vec2 p) {
     return fract( sin(p.x*100. + p.y*6574.)*5674. );
 }
-
-float Hash21(vec2 p) {
-    p = fract(p*vec2(345.567, 123.45));
-    p *= dot(p, p*456.75);
-    return fract(p.x * p.y);
-}
-
 
 mat2 Rot(float a) {
     float s=sin(a), c=cos(a);
@@ -82,21 +82,50 @@ float sdSphere( vec3 p, float s )
   return length(p)-s;
 }
 
-//  let phi = p * beta;
-//     let theta = q * beta;
-float GetDist( vec3 p ) {
-  float d = 0.0;
-   vec3 v;
-   float beta = clamp(cos(iFrame*0.01), 0.0, PI);
-   //float r = 0.01 * (0.8 + 1.6 * sin(6.0 * PI*0.01));
-   float r = 1. * (0.8 + 1.6 * sin(6.0 * beta));
-   float theta = 2.0 * beta;
-   float phi = 0.6 * PI * sin(12.0 * beta);
-   v.x = r * cos(phi) * cos(theta);
-   v.y = r * cos(phi) * sin(theta);
-   v.z = r * sin(phi);
-   d = mix(d, sdSphere(p-v, 0.1), 0.5);
-   return d;
+float sdBox(vec2 p, vec2 s) {
+    p = abs(p) - s;
+    return length(max(p, 0.0)) + min(max(p.x, p.y), 0.0);
+}
+
+// Creates a wreath like shape with two inter-twined torus knots
+float GetDist(vec3 pos) {
+    //p.xz *= Rot(iTime*.1);
+    // torus
+   // pos = abs(pos);
+    float d = 0.0;
+    float d1, d2;
+    float r1 = 0.8;
+    float r2 = 0.4; // increase r2 to make it fatter
+    float va = 0.00;
+    // Slice of the torus we are looking at 
+    // Revolving a 2d circle 
+    float a = atan(pos.x, pos.z);
+    vec2 cp = vec2(length(pos.xz)-r1, pos.y);
+    vec2 cp1 = vec2(length(pos.xz)-r1, pos.y- va);
+    // multiply angle by whole number get one long knot
+    // multiply by non-whole number get interconnected tori
+    float p = 7.0;
+    float q = 2.0;
+    // (3,2) trefoil knot, (5,2) Solomon's seal knot, 
+    cp *= Rot(a*(p/q));  
+    cp1 *= Rot(a*((p + 4.)/q));  
+    cp.y = abs(cp.y)- 0.1; // if subtract by 0.0 get a torus
+    cp1.y = abs(cp1.y)- 0.4;
+   
+    d1 = length(cp- vec2(0.0, 0.0))-r2;
+    d2 = length(cp1- vec2(0.0, 0.0))-r2;
+    // create ribbon like efect
+    // multiply times sin(a)*0.5 + 0.5 to vary radius of torus 
+    // d1 = sdBox(cp, vec2(0.21, 0.21*(sin(a)*0.0 + 0.0))) - .21; // create a ribbon-like effect
+    // d2 = sdBox(cp1, vec2(0.11, 0.11*(sin(a)*0.0 + 0.0))) - .11; // create a ribbon-like effect
+    // d = mix(d1,d2, 0.25);
+    //d = min(d1,d2);
+    float d3 = sdSphere(pos - vec3(0.45, 0.45, 0.45), 0.07);
+    float d4 = sdSphere(pos - vec3(0.4, 0.4, 0.45), 0.07);
+    float d5 = sdSphere(pos - vec3(0.38, 0.38, 0.40), 0.07);
+    float d6 = sdSphere(pos - vec3(0.95, 0.40, 0.22), 0.06); //good
+    d = min(d1, d5);
+    return d*0.8;
 }
 
 float RayMarch(vec3 ro, vec3 rd) {
@@ -134,28 +163,20 @@ vec3 GetRayDir(vec2 uv, vec3 p, vec3 l, float z) {
     return d;
 }
 
-// Function to create a nice background color
-vec3 Bg(vec3 rd) {
-    float k = rd.y*0.5+ 0.5;
-    vec3 col = mix(ORANGE, PURPLE, k);
-    return col;
-}
-
 void main()
 {
     vec2 uv = (gl_FragCoord.xy - .5*u_resolution.xy)/u_resolution.y;
 	vec2 m = iMouse.xy/u_resolution.xy;
     vec3 col = vec3(0);
     vec3 ro = vec3(0, 3, -3);
-    // ro.yz *= Rot(-m.y*3.14+1.);
-    // ro.xz *= Rot(-m.x*6.2831);
+    ro.yz *= Rot(-m.y*3.14+1.);
+    ro.xz *= Rot(-m.x*6.2831);
     
    // Last parameter--lens of camera
    // Increase to zoom in
-    vec3 rd = GetRayDir(uv, ro, vec3(0,0.,0), 0.5); 
-    
-    col += colorGradient(uv, PURPLE, TEAL, 0.4);
-
+    vec3 rd = GetRayDir(uv, ro, vec3(0,0.,0), 1.); 
+  
+    col += colorGradient(uv, vec3(0), RED, 0.75);
     float d = RayMarch(ro, rd);
 
     if(d<MAX_DIST) {
@@ -163,9 +184,9 @@ void main()
         vec3 n = GetNormal(p);
         vec3 r = reflect(rd, n);
         
-        float spec = pow(max(0.0, r.y), 25.); // add specular highlight
+        float spec = pow(max(0.0, r.y), 30.); // add specular highlight
         float dif = dot(n, normalize(vec3(1,2,3)))*.5+.5;
-         col = mix(FUSHIA, vec3(dif), 0.1)+spec;
+        col = mix(GREEN, vec3(dif), 0.15)+spec;
     }
     
     col = pow(col, vec3(.4545));	// gamma correction

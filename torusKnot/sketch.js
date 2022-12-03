@@ -7,39 +7,48 @@
 
 // Equation for Torus knots from
 // https://home.adelphi.edu/~stemkoski/knotgallery/
-//(3,2) = trefoil torus knot,  (5,2) Cinquefoil/Solomon's torus knot
-// (4,3) = torus knot
 
+// Here are some common parameter settings
+// (3,2) = trefoil torus knot,
+// (5,2) Cinquefoil/Solomon's torus knot
+// (4,3) 
+// (11,6) 
+// (8,9)
 let angle = 0;
 let beta = 0;
 let vectors = [];
-let p = 5;
-let q = 2;
-let r = 45;
+let p = 8;
+let q = 9;
+let r = 45; // will determine scale of knot
+let sc = 3;
 
 function setup() {
     knot = createCanvas(800, 450, WEBGL);
 }
 
 function draw() {
-    background('#EC015A');
+    background('#701616');
     //texture(knot);
     rotateY(angle);
-    angle += 0.03;
-    x = r * cos(q * beta) * (3 + cos(p * beta));
-    y = r * sin(q * beta) * (3 + cos(p * beta))
-    z = r * sin(p * beta);
+    angle += 0.01;
+    // phi and theta for torus knot
+    let phi = p * beta;
+    let theta = q * beta;
+    x = r * cos(theta) * (sc + cos(phi)) ;//- 3*cos((p-q)*phi);
+    y = r * sin(theta) * (sc + cos(phi)) ;// - 3*sin((p-q)*phi);
+    z = r * sin(phi);
+    //z = - sin(phi); //results in a plane
     vectors.push(createVector(x, y, z));
 
     beta += 0.01;
 
     noFill();
-    strokeWeight(8);
+    strokeWeight(4);
     beginShape();
     for (let i = 0; i < vectors.length; i++) {
         let v = vectors[i];
         let d = v.mag();
-        stroke(255, 255, d);
+        stroke(d, 255, d);
         vertex(v.x, v.y, v.z);
     }
     endShape();

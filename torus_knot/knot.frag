@@ -61,41 +61,27 @@ vec3 colorGradient(vec2 uv, vec3 col1, vec3 col2, float m) {
   return col;
 }  
 
-float N21( vec2 p) {
-    return fract( sin(p.x*100. + p.y*6574.)*5674. );
-}
-
-float Hash21(vec2 p) {
-    p = fract(p*vec2(345.567, 123.45));
-    p *= dot(p, p*456.75);
-    return fract(p.x * p.y);
-}
-
-
 mat2 Rot(float a) {
     float s=sin(a), c=cos(a);
     return mat2(c, -s, s, c);
 }
 
-float sdSphere( vec3 p, float s )
-{
-  return length(p)-s;
-}
-
-//  let phi = p * beta;
-//     let theta = q * beta;
-float GetDist( vec3 p ) {
-  float d = 0.0;
-   vec3 v;
-   float beta = clamp(cos(iFrame*0.01), 0.0, PI);
-   //float r = 0.01 * (0.8 + 1.6 * sin(6.0 * PI*0.01));
-   float r = 1. * (0.8 + 1.6 * sin(6.0 * beta));
-   float theta = 2.0 * beta;
-   float phi = 0.6 * PI * sin(12.0 * beta);
-   v.x = r * cos(phi) * cos(theta);
-   v.y = r * cos(phi) * sin(theta);
-   v.z = r * sin(phi);
-   d = mix(d, sdSphere(p-v, 0.1), 0.5);
+float GetDist( vec3 pos ) {
+   float beta = 0.01; // beta < PI
+   float dd = 0.0;
+   float d;
+   float a = atan(pos.x, pos.z);
+   float p = 5.0;
+    float q = 2.0;
+      vec3 offset;
+      float r = 100.0 * (0.8 + 1.6 * sin(6.0 * a * iTime));
+      float theta = 2.0 * a * iTime;
+      float phi = 0.6 * PI * sin(12.0 * a * iTime);
+      vec3 w = vec3(r, theta, phi);
+      offset.x = r * cos(p*theta) * cos(q*phi);
+      offset.y = r * cos(p*theta) * sin(q*phi);
+      offset.z = r * sin(p*phi);
+      d = length(pos)-0.05;
    return d;
 }
 
@@ -147,12 +133,12 @@ void main()
 	vec2 m = iMouse.xy/u_resolution.xy;
     vec3 col = vec3(0);
     vec3 ro = vec3(0, 3, -3);
-    // ro.yz *= Rot(-m.y*3.14+1.);
-    // ro.xz *= Rot(-m.x*6.2831);
+    ro.yz *= Rot(-m.y*3.14+1.);
+    ro.xz *= Rot(-m.x*6.2831);
     
    // Last parameter--lens of camera
    // Increase to zoom in
-    vec3 rd = GetRayDir(uv, ro, vec3(0,0.,0), 0.5); 
+    vec3 rd = GetRayDir(uv, ro, vec3(0,0.,0), 1.25); 
     
     col += colorGradient(uv, PURPLE, TEAL, 0.4);
 

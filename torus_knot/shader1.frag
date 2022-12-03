@@ -111,38 +111,6 @@ mat2 Rot(float a) {
     return mat2(c, -s, s, c);
 }
 
-// function to extract polar coordinates
-// from Daniel Shiffman
-vec3 Spherical( in vec3 pos) 
-{
-   float r = sqrt(pos.x*pos.x + pos.y*pos.y + pos.z*pos.z);
-   float theta = atan( sqrt(pos.x*pos.x + pos.y*pos.y), pos.z);
-   float phi = atan(pos.y, pos.x);
-   vec3 w = vec3(r, theta, phi);
-   return w;
-}
-
-float Knot( vec3 p ) {
-   float beta = 0.01; // beta < PI
-   float dd = 0.0;
-   float d;
-   for (int i = 0; i < 4; i ++)
-      {
-      vec3 offset;
-      float r = 0.01 * (0.8 + 1.6 * sin(6.0 * beta));
-      float theta = 2.0 * beta;
-      float phi = 0.6 * PI * sin(12.0 * beta);
-      vec3 w = vec3(r, theta, phi);
-      offset.x = r * cos(phi) * cos(theta);
-      offset.y = r * cos(phi) * sin(theta);
-      offset.z = r * sin(phi);
-      d = length(p)-0.05;
-      dd = max(dd, d);
-      beta += 0.1;
-      }
-   return dd;
-}
-
 float sdBox(vec2 p, vec2 s) {
     p = abs(p) - s;
     return length(max(p, 0.0)) + min(max(p.x, p.y), 0.0);

@@ -1,17 +1,12 @@
-// This sketch draws a torus knot using a shader.  
-// This version is a port of code from The Art of Code tutorial 
-// Torus Knots, Explained in ShaderToy
+// This sketch draws a "wreath" like shape by intertwining two torus knots
+// Based in part on The Art of Code YouTube tutorial Torus Knots, Explained
 
 // a shader variable
 let theShader;
-let shaders = [];
 
 function preload(){
   // load the shader
-  shaders[0] = loadShader('shader.vert', 'shader1.frag');
-  shaders[1] = loadShader('shader.vert', 'shader2.frag');
-  shaders[2] = loadShader('shader.vert', 'shader3.frag');
-  shaders[3] = loadShader('shader.vert', 'knot.frag');
+  theShader = loadShader('shader.vert', 'shader.frag');
 }
 
 function setup() {
@@ -23,7 +18,7 @@ function setup() {
 
 function draw() {  
   background(0);
-  let theShader = shaders[3];
+
   // send resolution of sketch into shader
   theShader.setUniform('u_resolution', [width, height]);
   theShader.setUniform("iMouse", [mouseX, map(mouseY, 0, height, height, 0)]);
