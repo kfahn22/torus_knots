@@ -17,7 +17,8 @@ uniform vec2 u_resolution; // This is passed in as a uniform from the sketch.js 
 uniform float iTime;
 uniform vec2 iMouse;
 uniform sampler2D utex0;
-//uniform sampler2D tex1;
+#define GOLD vec3(181, 130, 0) /255.
+#define PURPLE vec3(146,83,161) / 255.
 
 mat2 Rot(float a) {
     float s=sin(a), c=cos(a);
@@ -30,7 +31,7 @@ mat2 Rot(float a) {
 // }
 
 float GetDist(vec3 pos) {
-    p.xz *= Rot(iTime*.1);
+    pos.xz *= Rot(iTime*.1);
     // torus
     pos = abs(pos);
     float a = atan(pos.x, pos.z);
@@ -105,7 +106,7 @@ void main()
   
     // Add a reflective surface
     uv = vec2(atan(rd.x, rd.z)/ 6.2832 , rd.y/3.) + .5;  // remap coordinates
-    vec3 col = texture2D(tex0, uv).rgb;
+    vec3 col = texture2D(utex0, uv).rgb;
    
    // vec3 col = texture2D(tex0, rd.xz).rgb;
    
@@ -119,7 +120,7 @@ void main()
         vec3 p = ro + rd * d;
         vec3 n = GetNormal(p);
         vec3 r = reflect(rd, n);
-        vec3 refOutside = texture2D(tex0, r.xz).rgb;
+        vec3 refOutside = texture2D(utex0, r.xz).rgb;
 
         // refraction
         vec3 rdIn = refract(rd, n, 1./IOR); // ray dir when entering
@@ -146,17 +147,17 @@ void main()
         // red
         rdOut = refract(rdIn, nExit, IOR-abb);
         if (dot(rdOut, rdOut) == 0.) rdOut = reflect(rdIn, nExit);
-        refrTex.r = texture2D(tex0, rdOut.xz).r;
+        refrTex.r = texture2D(utex0, rdOut.xz).r;
      
         // green
         rdOut = refract(rdIn, nExit, IOR);
         if (dot(rdOut, rdOut) == 0.) rdOut = reflect(rdIn, nExit);
-        refrTex.g = texture2D(tex0, rdOut.xz).g;
+        refrTex.g = texture2D(utex0, rdOut.xz).g;
         
         // blue
         rdOut = refract(rdIn, nExit, IOR+abb);
         if (dot(rdOut, rdOut) == 0.) rdOut = reflect(rdIn, nExit);
-        refrTex.b = texture2D(tex0, rdOut.xz).b; // reflacted teture
+        refrTex.b = texture2D(utex0, rdOut.xz).b; // reflacted teture
         
        float density = .1;
        // Add optimal distance
@@ -171,8 +172,8 @@ void main()
         
         col = refrTex;
       
-        col = mix(refrTex, refOutside, fresnel);
         //col = n*.5 + .5;  // added  for debugging
+     // col = mix(vec3(0), refrTex, 0.25*fresnel);
     }
     
     col = pow(col, vec3(.4545));	// gamma correction

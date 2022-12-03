@@ -1,6 +1,6 @@
 // This sketch draws a torus knot using a shader.  
-// This version is a port of code from The Art of Code tutorial 
-// Torus Knots, Explained in ShaderToy
+// This version starts from a port of code from The Art of Code youtube tutorial 
+// Torus Knots, explained! 
 
 // a shader variable
 let theShader;
@@ -14,7 +14,7 @@ function preload(){
   shaders.push(loadShader('shader.vert', 'shader1.frag'));
   shaders.push(loadShader('shader.vert', 'shader2.frag'));
   shaders.push(loadShader('shader.vert', 'shader3.frag'));
-  shaders.push(loadShader('shader.vert', 'shader3.frag'));
+  // shaders.push(loadShader('shader.vert', 'shader4.frag'));
   theShader = shaders[0]; // start with the first shader
 }
 
