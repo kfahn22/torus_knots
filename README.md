@@ -1,22 +1,29 @@
 # Torus Knots
 
-This repository contains a collection of P5 sketches that render torus knots.  From [Wolfram MathWorld](https://mathworld.wolfram.com/TorusKnot.html):
+This repository contains a collection of P5 sketches that render torus knots, which you can think of as a string wrapped around a donut.  More formally:
 
->A (p,q)-torus knot is obtained by looping a string through the hole of a torus p times with q revolutions before joining its ends.
+>A (p,q)-torus knot is obtained by looping a string through the hole of a torus p times with q revolutions before joining its ends. [Wolfram MathWorld](https://mathworld.wolfram.com/TorusKnot.html)
 
-Daniel Shiffman renders a complex 3D knot in his [3D knot coding challenge](https://thecodingtrain.com/challenges/https://thecodingtrain.com/challenges/87-3d-knots).
+My journey with rendering knots started with Daniel Shiffman's [3D knot coding challenge](https://thecodingtrain.com/challenges/https://thecodingtrain.com/challenges/87-3d-knots).  He renders a knot using the following code, incrementing beta each time through the draw loop.
+
+`let r = 100 * (0.8 + 1.2 * sin(6.0 * beta));`
+`let theta = 2 * beta;`  
+`let phi = 0.6 * PI * sin(12 * beta);`  
+`let x = r * cos(phi) * cos(theta);`    
+`let y = r * cos(phi) * sin(theta);`  
+`let z = r * sin(phi);`
 
 <img class="img" src="assets/3dKnot.jpg" alt="3D Knot" style=" display: block;
     margin-left: auto;
     margin-right: auto;" width="800" height="450">
 
-I have used Daniel's code, but I have substituted the following equations to calculate the cartesian coordinates. Equations from Lee Stemkoski at [Parameterized Knots](https://home.adelphi.edu/~stemkoski/knotgallery/). 
+I have used Daniel's code, but I have substituted the code to calculate the cartesian coordinates. Equations from Lee Stemkoski at [Parameterized Knots](https://home.adelphi.edu/~stemkoski/knotgallery/). 
 
 `let phi = p * beta;`  
 `let theta = q * beta;`  
 `x = r * cos(theta) * (sc + cos(phi));`  
 `y = r * sin(theta) * (sc + cos(phi));`  
- `z = r * sin(phi);`
+`z = r * sin(phi);`
 
 (8,9) torus knot 
 <img class="img" src="assets/torus_knot.jpg" alt="(8,9) torus knot" style=" display: block;
@@ -25,6 +32,8 @@ I have used Daniel's code, but I have substituted the following equations to cal
 
 [Animated torus knot](https://editor.p5js.org/kfahn/sketches/gKqXNfljn)  
 [Code](https://github.com/kfahn22/torus_knots/tree/main/torusKnot)
+
+## Torus Knots Rendered with a shader
 
 I have also rendered the torus knot with a shader in P5.js. The Art of Code's YouTube tutorial [Torus Knots explained!](https://www.youtube.com/watch?v=2dzJZx0yngg) was very helpful in explaining how to render a torus knot in shadertoy, which I ported to P5.js.  I have three different versions, which are sequentially loaded.
 
@@ -44,3 +53,16 @@ Solomon's Seal / Cinquefoil torus knot (5,2)
     margin-right: auto;" width="800" height="450">
 
 [Code](https://github.com/kfahn22/torus_knots/tree/main/torus_knot)
+
+## 2D Polar Roses
+
+[Polar Rose Coding Challenge](https://thecodingtrain.com/challenges/55-mathematical-rose-patterns)
+
+If `z = -sin(phi)` is used, you get a 2D version of a polar rose with a hole.  The parambeter c
+controls the size of the hole. 
+
+`let r = 70 * (c + cos(k * a));`  
+`let x = r * cos(a);`  
+`let y = r * sin(a);`  
+
+[Polar Donut](https://editor.p5js.org/kfahn/sketches/ycprY17Yf)
