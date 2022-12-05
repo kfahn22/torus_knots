@@ -17,13 +17,13 @@
 let angle = 0;
 let beta = 0;
 let vectors = [];
-let p = 8;
-let q = 9;
+let p = 9;
+let q = 8;
 let r = 45; // will determine scale of knot
 let sc = 3;
 
 function setup() {
-    knot = createCanvas(800, 450, WEBGL);
+    knot = createCanvas(windowWidth, windowHeight, WEBGL);
 }
 
 function draw() {

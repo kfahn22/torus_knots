@@ -1,4 +1,4 @@
-# Torus Knots
+# 3D Knots
 
 This repository contains a collection of P5 sketches that render torus knots, which you can think of as a string wrapped around a donut.  More formally:
 
@@ -26,12 +26,24 @@ I have used Daniel's code, but I have substituted the code to calculate the cart
 `z = r * sin(phi);`
 
 (8,9) torus knot 
+
 <img class="img" src="assets/torus_knot.jpg" alt="(8,9) torus knot" style=" display: block;
     margin-left: auto;
     margin-right: auto;" width="800" height="450">
 
 [Animated torus knot](https://editor.p5js.org/kfahn/sketches/gKqXNfljn)  
 [Code](https://github.com/kfahn22/torus_knots/tree/main/torusKnot)
+
+## 2D Polar Rose
+
+If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a polar rose.  The parameter c
+controls the size of the hole. 
+
+`let r = 70 * (c + cos(k * a));`  
+`let x = r * cos(a);`  
+`let y = r * sin(a);`  
+
+[Polar Donut](https://editor.p5js.org/kfahn/sketches/ycprY17Yf)
 
 ## Torus Knots Rendered with a shader
 
@@ -58,11 +70,3 @@ Solomon's Seal / Cinquefoil torus knot (5,2)
 
 [Polar Rose Coding Challenge](https://thecodingtrain.com/challenges/55-mathematical-rose-patterns)
 
-If `z = -sin(phi)` is used, you get a 2D version of a polar rose with a hole.  The parambeter c
-controls the size of the hole. 
-
-`let r = 70 * (c + cos(k * a));`  
-`let x = r * cos(a);`  
-`let y = r * sin(a);`  
-
-[Polar Donut](https://editor.p5js.org/kfahn/sketches/ycprY17Yf)

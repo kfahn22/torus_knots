@@ -14,7 +14,7 @@ function preload(){
   shaders.push(loadShader('shader.vert', 'shader1.frag'));
   shaders.push(loadShader('shader.vert', 'shader2.frag'));
   shaders.push(loadShader('shader.vert', 'shader3.frag'));
-  // shaders.push(loadShader('shader.vert', 'shader4.frag'));
+  
   theShader = shaders[0]; // start with the first shader
 }
 

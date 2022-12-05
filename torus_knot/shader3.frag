@@ -76,6 +76,16 @@ mat2 Rot(float a) {
     return mat2(c, -s, s, c);
 }
 
+float sdHexagram( vec2 p,  float r )
+{
+    const vec4 k = vec4(-0.5,0.8660254038,0.5773502692,1.7320508076);
+    p = abs(p);
+    p -= 2.0*min(dot(k.xy,p),0.0)*k.xy;
+    p -= 2.0*min(dot(k.yx,p),0.0)*k.yx;
+    p -= vec2(clamp(p.x,r*k.z,r*k.w),r);
+    return length(p)*sign(p.y);
+}
+
 float sdBox(vec2 p, vec2 s) {
     p = abs(p) - s;
     return length(max(p, 0.0)) + min(max(p.x, p.y), 0.0);
@@ -110,7 +120,7 @@ float GetDist(vec3 pos) {
     // multiply times sin(a)*0.5 + 0.5 to vary radius of torus 
     d1 = sdBox(cp, vec2(0.21, 0.21*(sin(a)*0.0 + 0.0))) - r2; // create a ribbon-like effect
     d2 = sdBox(cp1, vec2(0.11, 0.11*(sin(a)*0.0 + 0.0))) - 0.11; // create a ribbon-like effect
-    // d = mix(d1,d2, 0.25);
+   // d = mix(d1,d2, 0.25);
     d = min(d1,d2);
 
     return d*0.8;
