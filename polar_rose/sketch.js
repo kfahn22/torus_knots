@@ -4,18 +4,18 @@
 // Based on: https://en.wikipedia.org/wiki/Rose_(mathematics)
 // https://thecodingtrain.com/CodingChallenges/055-roses.html
 
-let d = 8;
+let d = 2;
 let n = 5;
-let c = 5;
+let c = 53;
 let sliderD;
 let sliderN;
 let sliderC;
 
 function setup() {
   createCanvas(600, 600);
-  sliderD = createSlider(1, 20, 10, 1);
-  sliderN = createSlider(1, 20, 2, 1);
-  sliderC = createSlider(1, 5, 2, 1);
+  sliderD = createSlider(1, 20, 2, 1); //9 
+  sliderN = createSlider(1, 20, 5, 1); //8
+  sliderC = createSlider(1, 5, 3, 1); // 3
   sliderD.input(draw);
   sliderN.input(draw);
   sliderC.input(draw);

@@ -36,8 +36,8 @@ I have used Daniel's code, but I have substituted the code to calculate the cart
 
 ## 2D Polar Rose
 
-If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a polar rose.  The parameter c
-controls the size of the hole. 
+If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D .  With c
+= 0, you get a polar rose. 
 
 `let r = 70 * (c + cos(k * a));`  
 `let x = r * cos(a);`  
