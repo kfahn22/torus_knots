@@ -29,11 +29,11 @@ I have used Daniel's code, but I have substituted the code to calculate the cart
 
 <img class="img" src="assets/8-9.jpg" alt="(8,9) torus knot" style=" display: block;
     margin-left: auto;
-    margin-right: auto;" width="800" height="450">
+    margin-right: auto;" width="800" height="800">
 
 <img class="img" src="assets/8_9_side.jpg" alt="(8,9) torus knot side view" style=" display: block;
     margin-left: auto;
-    margin-right: auto;" width="800" height="450">
+    margin-right: auto;" width="800" height="800">
 
 
 [Animated torus knot](https://editor.p5js.org/kfahn/sketches/gKqXNfljn)  
