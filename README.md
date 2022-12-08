@@ -25,7 +25,7 @@ I have used Daniel's code, but I have replaced the code to calculate the cartesi
 `y = r * sin(theta) * (sc + cos(phi));`  
 `z = r * sin(phi);`
 
-(8,9) torus knot 
+Example:  (8,9) torus knot 
 
 <img class="img" src="assets/torus_2views.jpg" alt="(8,9) torus knot" style=" display: block;
     margin-left: auto;
@@ -36,7 +36,7 @@ I have used Daniel's code, but I have replaced the code to calculate the cartesi
 
 ## 2D Mathematical Rose
 
-If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D curve.  With c
+If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D curve.  If the parameter c
 = 0, you get a mathematical rose. 
 
 `let r = 70 * (c + cos(k * theta));`  

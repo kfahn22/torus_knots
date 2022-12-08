@@ -1,8 +1,9 @@
-// Daniel Shiffman
 // Mathematical Roses
+// The Coding Train / Daniel Shiffman / Kathy
+// https://thecodingtrain.com/challenges/55-mathematical-rose-patterns
 // Video: https://youtu.be/f5QBExMNB1I
+// Code from challenge:  https://editor.p5js.org/codingtrain/sketches/3kanFIcHd
 // Based on: https://en.wikipedia.org/wiki/Rose_(mathematics)
-// https://thecodingtrain.com/CodingChallenges/055-roses.html
 
 let d = 2;
 let n = 5;
