@@ -13,9 +13,15 @@ let sliderC;
 
 function setup() {
   createCanvas(600, 600);
-  sliderD = createSlider(1, 20, 2, 1); //9 
-  sliderN = createSlider(1, 20, 5, 1); //8
-  sliderC = createSlider(1, 5, 3, 1); // 3
+  divD = createDiv().position(10, 620);
+  labelD = createP('d').parent(divD);
+  sliderD = createSlider(1, 20, 2, 1).parent(divD); //9 
+  divN = createDiv().position(225, 620);
+  labelN = createP('n').parent(divN);
+  sliderN = createSlider(1, 20, 5, 1).parent(divN); //8
+  divC = createDiv().position(440, 620);
+  labelC = createP('c').parent(divC);
+  sliderC = createSlider(1, 5, 3, 1).parent(divC); // 3
   sliderD.input(draw);
   sliderN.input(draw);
   sliderC.input(draw);

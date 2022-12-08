@@ -39,16 +39,16 @@ I have used Daniel's code, but I have replaced the code to calculate the cartesi
 If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D curve.  With c
 = 0, you get a mathematical rose. 
 
-`let r = 70 * (c + cos(k * a));`  
-`let x = r * cos(a);`  
-`let y = r * sin(a);`  
+`let r = 70 * (c + cos(k * theta));`  
+`let x = r * cos(theta);`  
+`let y = r * sin(theta);`  
 
 - [Polar Donut](https://editor.p5js.org/kfahn/sketches/ycprY17Yf)
 - [Mathematical Rose Coding Challenge](https://thecodingtrain.com/challenges/55-mathematical-rose-patterns)
 
 ## Torus Knots Rendered with a shader
 
-I have also rendered the torus knot with a shader in P5.js. The Art of Code's YouTube tutorial [Torus Knots explained!](https://www.youtube.com/watch?v=2dzJZx0yngg) was very helpful in explaining how to render a torus knot in shadertoy, which I ported to P5.js.  I have three different versions, which are sequentially loaded.
+I have also rendered the torus knot with a shader in P5.js. The Art of Code's YouTube tutorial [Torus Knots explained!](https://www.youtube.com/watch?v=2dzJZx0yngg) was very helpful in explaining how to render a torus knot in shadertoy, which I ported to P5.js.  I have three different versions, which are sequentially loaded in the p5 sketch.
 
 Solomon's Seal / Cinquefoil torus knot (5,2)
 <img class="img" src="assets/solomons_seal.jpg" alt="Solomon's seal torus knot" style=" display: block;
