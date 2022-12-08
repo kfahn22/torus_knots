@@ -27,13 +27,9 @@ I have used Daniel's code, but I have replaced the code to calculate the cartesi
 
 (8,9) torus knot 
 
-<img class="img" src="assets/8-9.jpg" alt="(8,9) torus knot" style=" display: block;
+<img class="img" src="assets/torus_2views.jpg" alt="(8,9) torus knot" style=" display: block;
     margin-left: auto;
-    margin-right: auto;" width="400" height="400">
-
-<img class="img" src="assets/8_9_side.jpg" alt="(8,9) torus knot side view" style=" display: block;
-    margin-left: auto;
-    margin-right: auto;" width="400" height="400">
+    margin-right: auto;" width="800" height="400">
 
 - [Animated torus knot](https://editor.p5js.org/kfahn/sketches/gKqXNfljn)  
 - [Code](https://github.com/kfahn22/torus_knots/tree/main/torusKnot)
