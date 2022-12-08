@@ -25,7 +25,7 @@ I have used Daniel's code, but I have replaced the code to calculate the cartesi
 `y = r * sin(theta) * (sc + cos(phi));`  
 `z = r * sin(phi);`
 
-Example:  (8,9) torus knot 
+Example: (8,9) torus knot 
 
 <img class="img" src="assets/torus_2views.jpg" alt="(8,9) torus knot" style=" display: block;
     margin-left: auto;
