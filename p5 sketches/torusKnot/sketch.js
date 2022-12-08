@@ -1,9 +1,10 @@
 // Code based on 3D Knot coding challenge
-// Daniel Shiffman
+// Coding Train / Daniel Shiffman
 // https://thecodingtrain.com/challenges/87-3d-knots
+// https://youtu.be/r6YMKr1X0VA
+// Javascript transcription: Chuck England
 
-// 3D Knot
-// Video: https://youtu.be/r6YMKr1X0VA
+// Code from challenge: https://editor.p5js.org/codingtrain/sketches/fa1rAWng9
 
 // Equation for Torus knots from
 // https://home.adelphi.edu/~stemkoski/knotgallery/
@@ -28,7 +29,6 @@ function setup() {
 
 function draw() {
     background('#701616');
-    //texture(knot);
     rotateY(angle);
     angle += 0.01;
     // phi and theta for torus knot
