@@ -43,6 +43,10 @@ If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D curve.  
 `let x = r * cos(theta);`  
 `let y = r * sin(theta);`  
 
+<img class="img" src="assets/polar_rose.jpg" alt="(8,9) torus knot" style=" display: block;
+    margin-left: auto;
+    margin-right: auto;" width="800" height="400">
+
 - [Polar Donut](https://editor.p5js.org/kfahn/sketches/ycprY17Yf)
 - [Mathematical Rose Coding Challenge](https://thecodingtrain.com/challenges/55-mathematical-rose-patterns)
 
