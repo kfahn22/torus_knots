@@ -31,6 +31,7 @@ Example: (8,9) torus knot
     margin-left: auto;
     margin-right: auto;" width="800" height="400">
 
+- [Live Version](https://kfahn22.github.io/torus_knots/)
 - [Animated torus knot](https://editor.p5js.org/kfahn/sketches/gKqXNfljn)  
 - [Code](https://github.com/kfahn22/torus_knots/tree/main/torusKnot)
 
