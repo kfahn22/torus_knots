@@ -59,6 +59,8 @@ n = 7, d = 2, c = 1.25
 
 I have also rendered the torus knot with a shader in P5.js. The Art of Code's YouTube tutorial [Torus Knots explained!](https://www.youtube.com/watch?v=2dzJZx0yngg) was very helpful in explaining how to render a torus knot in shadertoy, which I ported to P5.js.  I have three different versions, which are sequentially loaded in the p5 sketch.
 
+In this torus knot, we are rotating a square instead of a circle which is how we obtain a ribbon effect.
+
 Solomon's Seal / Cinquefoil torus knot (5,2)
 <img class="img" src="assets/solomons_seal.jpg" alt="Solomon's seal torus knot" style=" display: block;
     margin-left: auto;
