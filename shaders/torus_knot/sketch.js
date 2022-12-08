@@ -1,6 +1,6 @@
 // This sketch draws a torus knot using a shader.  
-// This version is a port of code from The Art of Code tutorial 
-// Torus Knots, Explained in ShaderToy
+// This version starts from a port of code from The Art of Code youtube tutorial 
+// Torus Knots, explained! 
 
 // a shader variable
 let theShader;
@@ -10,9 +10,11 @@ const shaders = [];
 
 function preload(){
   // load the shader
+  img = loadImage('ice.jpeg');
   shaders.push(loadShader('shader.vert', 'shader1.frag'));
-  shaders[1] = loadShader('shader.vert', 'shader2.frag');
-  shaders[2] = loadShader('shader.vert', 'shader3.frag');
+  shaders.push(loadShader('shader.vert', 'shader2.frag'));
+  shaders.push(loadShader('shader.vert', 'shader3.frag'));
+  
   theShader = shaders[0]; // start with the first shader
 }
 
@@ -41,6 +43,7 @@ function draw() {
   theShader.setUniform("iMouse", [mouseX, map(mouseY, 0, height, height, 0)]);
   theShader.setUniform("iFrame", frameCount);
   theShader.setUniform("iTime", millis()/1000.);
+  theShader.setUniform("utex0", img);
  
   // shader() sets the active shader with our shader
   shader(theShader);

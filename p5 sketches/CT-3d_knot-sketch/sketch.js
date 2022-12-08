@@ -35,7 +35,7 @@ function draw() {
     let x = r * cos(phi) * cos(theta);
     let y = r * cos(phi) * sin(theta);
     let z = r * sin(phi);
-    //stroke(255, r, 255);
+    //let z = -sin(phi); // results in a plane
     
     vectors.push(createVector(x, y, z));
 
