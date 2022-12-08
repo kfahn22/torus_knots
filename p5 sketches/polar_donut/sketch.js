@@ -5,6 +5,8 @@
 // Code from challenge:  https://editor.p5js.org/codingtrain/sketches/3kanFIcHd
 // Based on: https://en.wikipedia.org/wiki/Rose_(mathematics)
 
+// My version:  https://editor.p5js.org/kfahn/sketches/ycprY17Yf
+
 let d = 2;
 let n = 5;
 let c = 53;
@@ -22,7 +24,7 @@ function setup() {
   sliderN = createSlider(1, 20, 5, 1).parent(divN); //8
   divC = createDiv().position(440, 620);
   labelC = createP('c').parent(divC);
-  sliderC = createSlider(1, 5, 3, 1).parent(divC); // 3
+  sliderC = createSlider(1, 5, 1.25, 0.1).parent(divC); // 3
   sliderD.input(draw);
   sliderN.input(draw);
   sliderC.input(draw);

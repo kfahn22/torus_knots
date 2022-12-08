@@ -39,11 +39,16 @@ Example:  (8,9) torus knot
 If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D curve.  If the parameter c
 = 0, you get a mathematical rose. 
 
+`let k = n / d;`  
 `let r = 70 * (c + cos(k * theta));`  
 `let x = r * cos(theta);`  
 `let y = r * sin(theta);`  
 
-<img class="img" src="assets/polar_rose.jpg" alt="(8,9) torus knot" style=" display: block;
+I am not sure what the official name for this is, but I am calling it a polar donut. Rendered with  
+n = 7, d = 2, c = 1.25
+
+
+<img class="img" src="assets/polar_rose.jpg" alt="Polar Donut" style=" display: block;
     margin-left: auto;
     margin-right: auto;" width="800" height="400">
 
