@@ -17,7 +17,7 @@ My journey with rendering knots started with Daniel Shiffman's [3D knot coding c
     margin-left: auto;
     margin-right: auto;" width="800" height="450">
 
-I have used Daniel's code, but I have substituted the code to calculate the cartesian coordinates. Equations from Lee Stemkoski at [Parameterized Knots](https://home.adelphi.edu/~stemkoski/knotgallery/). 
+I have used Daniel's code, but I have replaced the code to calculate the cartesian coordinates. Equations from Lee Stemkoski at [Parameterized Knots](https://home.adelphi.edu/~stemkoski/knotgallery/). 
 
 `let phi = p * beta;`  
 `let theta = q * beta;`  
@@ -29,11 +29,11 @@ I have used Daniel's code, but I have substituted the code to calculate the cart
 
 <img class="img" src="assets/8-9.jpg" alt="(8,9) torus knot" style=" display: block;
     margin-left: auto;
-    margin-right: auto;" width="800" height="800">
+    margin-right: auto;" width="400" height="400">
 
 <img class="img" src="assets/8_9_side.jpg" alt="(8,9) torus knot side view" style=" display: block;
     margin-left: auto;
-    margin-right: auto;" width="800" height="800">
+    margin-right: auto;" width="400" height="400">
 
 - [Animated torus knot](https://editor.p5js.org/kfahn/sketches/gKqXNfljn)  
 - [Code](https://github.com/kfahn22/torus_knots/tree/main/torusKnot)
