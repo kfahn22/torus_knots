@@ -41,14 +41,14 @@ I have used Daniel's code, but I have substituted the code to calculate the cart
 ## 2D Mathematical Rose
 
 If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D curve.  With c
-= 0, you get a polar rose. 
+= 0, you get a mathematical rose. 
 
 `let r = 70 * (c + cos(k * a));`  
 `let x = r * cos(a);`  
 `let y = r * sin(a);`  
 
 - [Polar Donut](https://editor.p5js.org/kfahn/sketches/ycprY17Yf)
-- [Polar Rose Coding Challenge](https://thecodingtrain.com/challenges/55-mathematical-rose-patterns)
+- [Mathematical Rose Coding Challenge](https://thecodingtrain.com/challenges/55-mathematical-rose-patterns)
 
 ## Torus Knots Rendered with a shader
 
