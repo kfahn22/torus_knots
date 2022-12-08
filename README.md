@@ -35,20 +35,20 @@ I have used Daniel's code, but I have substituted the code to calculate the cart
     margin-left: auto;
     margin-right: auto;" width="800" height="800">
 
+- [Animated torus knot](https://editor.p5js.org/kfahn/sketches/gKqXNfljn)  
+- [Code](https://github.com/kfahn22/torus_knots/tree/main/torusKnot)
 
-[Animated torus knot](https://editor.p5js.org/kfahn/sketches/gKqXNfljn)  
-[Code](https://github.com/kfahn22/torus_knots/tree/main/torusKnot)
+## 2D Mathematical Rose
 
-## 2D Polar Rose
-
-If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D .  With c
+If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D curve.  With c
 = 0, you get a polar rose. 
 
 `let r = 70 * (c + cos(k * a));`  
 `let x = r * cos(a);`  
 `let y = r * sin(a);`  
 
-[Polar Donut](https://editor.p5js.org/kfahn/sketches/ycprY17Yf)
+- [Polar Donut](https://editor.p5js.org/kfahn/sketches/ycprY17Yf)
+- [Polar Rose Coding Challenge](https://thecodingtrain.com/challenges/55-mathematical-rose-patterns)
 
 ## Torus Knots Rendered with a shader
 
@@ -70,8 +70,3 @@ Solomon's Seal / Cinquefoil torus knot (5,2)
     margin-right: auto;" width="800" height="450">
 
 [Code](https://github.com/kfahn22/torus_knots/tree/main/torus_knot)
-
-## 2D Polar Roses
-
-[Polar Rose Coding Challenge](https://thecodingtrain.com/challenges/55-mathematical-rose-patterns)
-
