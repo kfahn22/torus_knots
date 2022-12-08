@@ -31,7 +31,7 @@ I have used Daniel's code, but I have substituted the code to calculate the cart
     margin-left: auto;
     margin-right: auto;" width="800" height="450">
 
-<img class="img" src="assets/8-9_side.jpg" alt="(8,9) torus knot side view" style=" display: block;
+<img class="img" src="assets/8_9_side.jpg" alt="(8,9) torus knot side view" style=" display: block;
     margin-left: auto;
     margin-right: auto;" width="800" height="450">
 
