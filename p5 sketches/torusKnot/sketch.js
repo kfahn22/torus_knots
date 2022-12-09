@@ -20,8 +20,8 @@ let beta = 0;
 let vectors = [];
 let p = 9;
 let q = 8;
-let r = 45; // will determine scale of knot
-let sc = 3;
+let r ; // will determine scale of knot
+let sc = 5;
 
 function setup() {
     knot = createCanvas(windowWidth, windowHeight, WEBGL);
@@ -29,7 +29,9 @@ function setup() {
 
 function draw() {
     background('#701616');
+    //translate(width/2, height/2);
     rotateY(angle);
+    r = 0.05*height;
     angle += 0.01;
     // phi and theta for torus knot
     let phi = p * beta;

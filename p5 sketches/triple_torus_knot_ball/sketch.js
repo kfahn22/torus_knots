@@ -22,8 +22,8 @@ let vectors2 = [];
 let vectors3 = [];
 let p = 9;
 let q = 8;
-let r = 20; // will determine scale of knot
-let h = 1;
+let r = 30; // will determine scale of knot
+let h = 2;
 let k = 30;
 
 function setup() {
@@ -34,24 +34,32 @@ function draw() {
     //background('#398974');
     background('#701f2e');
     rotateY(angle);
+    r = 0.09*height;
     angle += 0.01;
     // phi and theta for torus knot
     let phi = p * beta;
     let theta = q * beta;
+    push();
+    //translate(width/2, height/4)
     x = r * cos(theta) * (h + cos(phi)) ;//- 3*cos((p-q)*phi);
     y = r * sin(theta) * (h + cos(phi)) ;// - 3*sin((p-q)*phi);
     z = r * sin(phi);
     //z = - sin(phi); //results in a plane
     vectors.push(createVector(x, y, z));
-    // make a second larger one with axis reversed
-    z2 = (r + k)* cos(theta) * (h + cos(phi)) ;//- 3*cos((p-q)*phi);
-    x2 = (r + k)* sin(theta) * (h + cos(phi)) ;// - 3*sin((p-q)*phi);
-    y2 = (r + k)* sin(phi);
-    // make a third one that is even larger 
+    pop();
+    push();
+    // make a second larger one with axis changed
+    z2 = r * cos(theta) * (h + cos(phi)) ;//- 3*cos((p-q)*phi);
+    x2 = r * sin(theta) * (h + cos(phi)) ;// - 3*sin((p-q)*phi);
+    y2 = r * sin(phi);
+    // make a third one with axis changed
+    pop();
+    push();
+    //translate(width/2, height/4);
     vectors2.push(createVector(x2,y2,z2));
-    y3 = (r + 2 * k)* cos(theta) * (h + cos(phi)) ;//- 3*cos((p-q)*phi);
-    z3 = (r + 2 * k)* sin(theta) * (h + cos(phi)) ;// - 3*sin((p-q)*phi);
-    x3 = (r + 2 * k)* sin(phi);
+    y3 = r * cos(theta) * (h + cos(phi)) ;//- 3*cos((p-q)*phi);
+    z3 = r * sin(theta) * (h + cos(phi)) ;// - 3*sin((p-q)*phi);
+    x3 = r * sin(phi);
     vectors3.push(createVector(x3,y3,z3));
 
     beta += 0.01;
@@ -69,6 +77,7 @@ function draw() {
     beginShape();
     for (let i = 0; i < vectors2.length; i++) {
         let v = vectors2[i];
+        //stroke('#efa634');
         stroke('#feee8f');
         vertex(v.x, v.y, v.z);
     }
