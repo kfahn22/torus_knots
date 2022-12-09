@@ -1,6 +1,10 @@
 // This sketch draws a torus knot using a shader.  
 // This version starts from a port of code from The Art of Code youtube tutorial 
 // Torus Knots, explained! 
+// https://www.youtube.com/watch?v=2dzJZx0yngg
+
+// Technique for loading multiple shaders from
+// https://stackoverflow.com/questions/62418710/fading-between-shadertoy-shaders-in-p5-js
 
 // a shader variable
 let theShader;
