@@ -40,7 +40,9 @@ Here I have rendered three different torus knots with different radii.
 <img class="img" src="assets/torus_xmas.jpg" alt="(8,9) torus knot" style=" display: block;
     margin-left: auto;
     margin-right: auto;" width="800" height="400">
-  
+
+[Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/triple_torus_knot)
+
 ## 2D Mathematical Rose
 
 If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D curve.  If the parameter c
