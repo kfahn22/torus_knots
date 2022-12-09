@@ -9,16 +9,32 @@ class TorusKnot {
         this.h = _h;
         this.vectors = [];
     }
+    // oneCycle() {
+    //     this.sc += 0.005;
+    //     for (let a = 0; a < PI; a += 0.01) {
+    //         const r = this.sc * pow(sin(a), 7) * pow(e, 2 * a)
+    //         const x = r * cos(a);
+    //         const y = -r * abs(sin(a));
+    //         if (this.beat) {
+    //             this.pulse = map(cos(a), 0, this.pulseRadius, 0.5, -1);
+    //         }
+
+    //         if (this.vectors.length < 500) {
+    //             this.vectors.push(createVector(x, y));
+    //         }
+    //     }
+    // }
     knot() {
-        for (let beta=0;beta < 100;beta++)
-        {let phi = this.p * beta;
-        let theta = this.q * beta;
-        let x = this.r * cos(theta) * (this.h + cos(phi)); 
-        let y = this.r * sin(theta) * (this.h + cos(phi)); 
-        let z = this.r * sin(phi);
-        this.vectors.push(createVector(x, y, z));}
-        // beta += 0.01;
-        // return this.vectors;
+        for (let beta = 0; beta < PI; beta += 0.01) {
+            let phi = this.p * beta;
+            let theta = this.q * beta;
+            const x = this.r * cos(theta) * (this.h + cos(phi));
+            const y = this.r * sin(theta) * (this.h + cos(phi));
+            const z = this.r * sin(phi);
+            if (this.vectors.length < 500) {
+                this.vectors.push(createVector(x, y, z));
+            }
+        }
     }
     show(angle) {
         push();
