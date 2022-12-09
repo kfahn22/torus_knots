@@ -24,20 +24,20 @@ let r ; // will determine scale of knot
 let sc = 5;
 
 function setup() {
-    knot = createCanvas(windowWidth, windowHeight, WEBGL);
+    createCanvas(windowWidth, windowHeight, WEBGL);
 }
 
 function draw() {
     background('#701616');
-    //translate(width/2, height/2);
     rotateY(angle);
     r = 0.05*height;
     angle += 0.01;
+    
     // phi and theta for torus knot
     let phi = p * beta;
     let theta = q * beta;
-    x = r * cos(theta) * (sc + cos(phi)) ;//- 3*cos((p-q)*phi);
-    y = r * sin(theta) * (sc + cos(phi)) ;// - 3*sin((p-q)*phi);
+    x = r * cos(theta) * (sc + cos(phi));
+    y = r * sin(theta) * (sc + cos(phi));
     z = r * sin(phi);
     //z = - sin(phi); //results in a plane
     vectors.push(createVector(x, y, z));

@@ -9,85 +9,27 @@
 // Equation for Torus knots from
 // https://home.adelphi.edu/~stemkoski/knotgallery/
 
-// Here are some common parameter settings
-// (3,2) = trefoil torus knot,
-// (5,2) Cinquefoil/Solomon's torus knot
-// (4,3) 
-// (11,6) 
-// (8,9)
+
 let angle = 0;
 let beta = 0;
-let vectors = [];
-let vectors2 = [];
-let vectors3 = [];
+let knots = [];
 let p = 9;
 let q = 8;
-let r = 30; // will determine scale of knot
+let r = 5; // will determine scale of knot
 let h = 2;
-let k = 30;
 
 function setup() {
-    knot = createCanvas(800, 800, WEBGL);
+    createCanvas(600, 600, WEBGL);
+    knots.push(new TorusKnot(p, q, r, h));
 }
 
 function draw() {
-    //background('#398974');
     background('#701f2e');
+    translate(width / 2, height / 2);
     rotateY(angle);
-    r = 0.09*height;
     angle += 0.01;
-    // phi and theta for torus knot
-    let phi = p * beta;
-    let theta = q * beta;
-    push();
-    //translate(width/2, height/4)
-    x = r * cos(theta) * (h + cos(phi)) ;//- 3*cos((p-q)*phi);
-    y = r * sin(theta) * (h + cos(phi)) ;// - 3*sin((p-q)*phi);
-    z = r * sin(phi);
-    //z = - sin(phi); //results in a plane
-    vectors.push(createVector(x, y, z));
-    pop();
-    push();
-    // make a second larger one with axis changed
-    z2 = r * cos(theta) * (h + cos(phi)) ;//- 3*cos((p-q)*phi);
-    x2 = r * sin(theta) * (h + cos(phi)) ;// - 3*sin((p-q)*phi);
-    y2 = r * sin(phi);
-    // make a third one with axis changed
-    pop();
-    push();
-    //translate(width/2, height/4);
-    vectors2.push(createVector(x2,y2,z2));
-    y3 = r * cos(theta) * (h + cos(phi)) ;//- 3*cos((p-q)*phi);
-    z3 = r * sin(theta) * (h + cos(phi)) ;// - 3*sin((p-q)*phi);
-    x3 = r * sin(phi);
-    vectors3.push(createVector(x3,y3,z3));
+    knots[0].knot();
+    knots[0].show(angle);
 
-    beta += 0.01;
 
-    noFill();
-    strokeWeight(4);
-    beginShape();
-    for (let i = 0; i < vectors.length; i++) {
-        let v = vectors[i];
-        //stroke('#efa634');
-        stroke('#ebf9ff');
-        vertex(v.x, v.y, v.z);
-    }
-    endShape();
-    beginShape();
-    for (let i = 0; i < vectors2.length; i++) {
-        let v = vectors2[i];
-        //stroke('#efa634');
-        stroke('#feee8f');
-        vertex(v.x, v.y, v.z);
-    }
-    endShape();
-    beginShape();
-    for (let i = 0; i < vectors3.length; i++) {
-        let v = vectors3[i];
-        //stroke('#9bce55');
-        stroke('#54b098');
-        vertex(v.x, v.y, v.z);
-    }
-    endShape();
 }
