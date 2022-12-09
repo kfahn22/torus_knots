@@ -10,15 +10,15 @@ class TorusKnot {
         this.vectors = [];
     }
     knot() {
-        let beta = 0;
-        let phi = this.p * beta;
+        for (let beta=0;beta < 100;beta++)
+        {let phi = this.p * beta;
         let theta = this.q * beta;
         let x = this.r * cos(theta) * (this.h + cos(phi)); 
         let y = this.r * sin(theta) * (this.h + cos(phi)); 
         let z = this.r * sin(phi);
-        this.vectors.push(createVector(x, y, z));
-        beta += 0.01;
-        return this.vectors;
+        this.vectors.push(createVector(x, y, z));}
+        // beta += 0.01;
+        // return this.vectors;
     }
     show(angle) {
         push();
