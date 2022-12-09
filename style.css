@@ -12,7 +12,10 @@ html, body {
   canvas {
     display: block;
   }
-  
+  /* nav {
+    background-color: #fff;
+  } */
+
   div {
     margin: 1vh;
     padding: 1vw;
@@ -22,8 +25,8 @@ html, body {
   iframe {
     margin-top: 1vh;
     width: 90vw;
-    margin-left: 1vw;
-    /* margin-right: auto; */
+    /* margin-left: 1vw; */
+    margin-right: 5vw;
   }
   
   a:link, a:visited {
@@ -49,7 +52,6 @@ html, body {
   
   #links {
     display:block;
-    float: left;
+    float: right;
     padding: 8px;
-    background-color: #fff;
   }
