@@ -41,7 +41,8 @@ Here I have rendered three different torus knots with different radii.
     margin-left: auto;
     margin-right: auto;" width="800" height="400">
 
-[Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/triple_torus_knot)
+- [Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/triple_torus_knot)
+- [P5 sketch](https://editor.p5js.org/kfahn/sketches/IpjfsH0X9)
 
 ## 2D Mathematical Rose
 
@@ -85,4 +86,5 @@ Solomon's Seal / Cinquefoil torus knot (5,2)
     margin-left: auto;
     margin-right: auto;" width="800" height="450">
 
-[Code](https://github.com/kfahn22/torus_knots/tree/main/torus_knot)
+- [Code](https://github.com/kfahn22/torus_knots/tree/main/torus_knot)
+- [P5 sketch](https://editor.p5js.org/kfahn/sketches/y3-Ck-kch)
