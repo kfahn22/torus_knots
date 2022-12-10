@@ -89,13 +89,13 @@ float sdBox(vec2 p, vec2 s) {
 
 // Creates a wreath like shape with two inter-twined torus knots
 float Decorations(vec3 pos) {
-    float d;
+    float d = 0.0;
     float d1 = sdSphere(pos - vec3(0.45, 0.45, 0.45), 0.07);
     float d2 = sdSphere(pos - vec3(0.4, 0.4, 0.45), 0.07);
     float d3 = sdSphere(pos - vec3(0.38, 0.40, 0.40), 0.07); // good
     float d4 = sdSphere(pos - vec3(0.95, 0.40, 0.22), 0.06); // good
     //d += min(d1, d5);
-    d += d1 + d2;
+    d += d1;
     return d;
 }
 

@@ -28,7 +28,6 @@ uniform float iFrame;
 #define T iTime
 #define PI 3.14159
 
-
 #define PURPLE vec3(146,83,161) / 255.
 #define RED vec3(218, 18, 14) / 255.
 #define ORANGE vec3(248,158,79) / 255.
@@ -88,11 +87,13 @@ float sdBox(vec2 p, vec2 s) {
 }
 
 // Creates a wreath like shape with two inter-twined torus knots
-float GetDist(vec3 pos) {
+vec2 Wreath(vec3 pos) {
     //p.xz *= Rot(iTime*.1);
     // torus
    // pos = abs(pos);
     float d = 0.0;
+    float dd = 0.0;
+    float matID = 0.0;
     float d1, d2;
     float r1 = 0.8;
     float r2 = 0.4; // increase r2 to make it fatter
@@ -114,23 +115,40 @@ float GetDist(vec3 pos) {
    
     d1 = length(cp- vec2(0.0, 0.0))-r2;
     d2 = length(cp1- vec2(0.0, 0.0))-r2;
-   
-    // for decorations
-    float d3 = sdSphere(pos - vec3(0.45, 0.45, 0.45), 0.07);
-    float d4 = sdSphere(pos - vec3(0.4, 0.4, 0.45), 0.07);
-    float d5 = sdSphere(pos - vec3(0.38, 0.40, 0.40), 0.07); // good
-    float d6 = sdSphere(pos - vec3(0.95, 0.40, 0.22), 0.06); // good
-    d = min(d1, d5);
-    return d*0.8;
+    d = d1*0.8; // multiply by 0.8 as fudge factor to avoid glitching
+
+    // Add spheres as decorations
+    for (float i = 0.0; i < 1.0; i+=0.01) {
+      float n = 0.05*N21(pos.xy); // get a pseudo random number between 0. and 1.
+      //float n = 0.04;
+      //float dd = sdSphere(pos - vec3(0.45, 0.45, 0.45), 0.07);
+      float di = sdSphere(pos - vec3(0.45, 0.45, 0.45), 0.08); // good
+    //   float d4 = sdSphere(pos - vec3(0.4, 0.4, 0.45), 0.07);
+    //   float d5 = sdSphere(pos - vec3(0.38, 0.40, 0.40), 0.08); // good
+    //   float d6 = sdSphere(pos - vec3(0.95, 0.40, 0.22), 0.06); // good
+      // we add a material ID to color the ball
+      if (di < d) {
+        matID = 1.0;
+      }
+      dd += max(dd, di);
+    }
+    d = min(d, dd);
+    return vec2(d, matID);
+}
+
+float GetDist( vec3 pos ) {
+   return Wreath(pos).x;
 }
 
 float RayMarch(vec3 ro, vec3 rd) {
 	float dO=0.;
-    
+    float matID = -1.0;
+    float tmp;
     for(int i=0; i<MAX_STEPS; i++) {
     	vec3 p = ro + rd*dO;
         float dS = GetDist(p);
         dO += dS;
+        matID = tmp;
         if(dO>MAX_DIST || abs(dS)<SURF_DIST) break;
     }
     
@@ -181,10 +199,15 @@ void main()
         vec3 p = ro + rd * d;
         vec3 n = GetNormal(p);
         vec3 r = reflect(rd, n);
-        
+        float matID = Wreath(p).y;
+
         float spec = pow(max(0.0, r.y), 30.); // add specular highlight
         float dif = dot(n, normalize(vec3(1,2,3)))*.5+.5;
-        col = mix(GREEN, vec3(dif), 0.15)+spec;
+        if (matID == 0.0){
+          col = mix(GREEN, vec3(dif), 0.15)+spec;
+        } else if (matID == 1.0) {
+          col = mix(RED, vec3(dif), 0.15)+spec;
+        }
     }
     
     col = pow(col, vec3(.4545));	// gamma correction
