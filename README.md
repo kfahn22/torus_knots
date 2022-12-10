@@ -6,7 +6,7 @@ This repository contains a collection of P5 sketches that render torus knots, wh
 
 My journey with rendering knots started with Daniel Shiffman's [3D knot coding challenge](https://thecodingtrain.com/challenges/https://thecodingtrain.com/challenges/87-3d-knots).  He renders a knot using the following code, incrementing beta each time through the draw loop.
 
-`let r = 100 * (0.8 + 1.2 * sin(6.0 * beta));`
+`let r = 100 * (0.8 + 1.2 * sin(6.0 * beta));`  
 `let theta = 2 * beta;`  
 `let phi = 0.6 * PI * sin(12 * beta);`  
 `let x = r * cos(phi) * cos(theta);`    
