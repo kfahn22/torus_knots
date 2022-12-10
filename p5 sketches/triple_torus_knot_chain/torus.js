@@ -1,9 +1,11 @@
+//https://github.com/anuraghazra/CanvasFun/blob/master/LoveHearts/Heart.js
+
 class TorusKnot {
-    contructor(_p, _q, _r, _h) {
+    contructor(x=0, y=0, _p, _q, _r, _h) {
         this.p = _p;
         this.q = _q;
-        // this.x = _x;
-        // this.y = _y;
+        this.x = x;
+        this.y = y;
         this.angle = _angle;
         this.r = _r;
         this.h = _h;
@@ -24,7 +26,7 @@ class TorusKnot {
     //         }
     //     }
     // }
-    knot() {
+    oneKnot() {
         for (let beta = 0; beta < PI; beta += 0.01) {
             let phi = this.p * beta;
             let theta = this.q * beta;

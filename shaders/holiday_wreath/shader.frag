@@ -114,17 +114,12 @@ float GetDist(vec3 pos) {
    
     d1 = length(cp- vec2(0.0, 0.0))-r2;
     d2 = length(cp1- vec2(0.0, 0.0))-r2;
-    // create ribbon like efect
-    // multiply times sin(a)*0.5 + 0.5 to vary radius of torus 
-    // d1 = sdBox(cp, vec2(0.21, 0.21*(sin(a)*0.0 + 0.0))) - .21; // create a ribbon-like effect
-    // d2 = sdBox(cp1, vec2(0.11, 0.11*(sin(a)*0.0 + 0.0))) - .11; // create a ribbon-like effect
-    // d = mix(d1,d2, 0.25);
-    //d = min(d1,d2);
+   
     // for decorations
     float d3 = sdSphere(pos - vec3(0.45, 0.45, 0.45), 0.07);
     float d4 = sdSphere(pos - vec3(0.4, 0.4, 0.45), 0.07);
     float d5 = sdSphere(pos - vec3(0.38, 0.40, 0.40), 0.07); // good
-    float d6 = sdSphere(pos - vec3(0.95, 0.40, 0.22), 0.06); //good
+    float d6 = sdSphere(pos - vec3(0.95, 0.40, 0.22), 0.06); // good
     d = min(d1, d5);
     return d*0.8;
 }
@@ -170,6 +165,8 @@ void main()
 	vec2 m = iMouse.xy/u_resolution.xy;
     vec3 col = vec3(0);
     vec3 ro = vec3(0, 3, -3);
+
+    // Add ability to move with the mouse
     ro.yz *= Rot(-m.y*3.14+1.);
     ro.xz *= Rot(-m.x*6.2831);
     

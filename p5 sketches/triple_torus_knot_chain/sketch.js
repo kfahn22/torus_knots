@@ -28,7 +28,7 @@ function draw() {
     translate(width / 2, height / 2);
     rotateY(angle);
     angle += 0.01;
-    knots[0].knot();
+    knots[0].oneKnot();
     knots[0].show(angle);
 
 

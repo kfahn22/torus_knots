@@ -1,6 +1,7 @@
-// This sketch tries to draw the 3d knot rendered in the 3D knot coding challenge
-// I have a sphere that moves around, but I am not sure whether it is accurately
-// tracing the path of the 3d knot.
+// This code renders a rhombic dodecahedron with reflection.
+// It is ported to p5.js from a youtube tutorial by The Art of Code
+
+
 
 
 // a shader variable
@@ -14,24 +15,24 @@ function preload(){
 function setup() {
   pixelDensity(1);
   // shaders require WEBGL mode to work
-  createCanvas(800, 450, WEBGL);
+  createCanvas(800, 800, WEBGL);
   noStroke();
 }
 
 function draw() {  
   background(0);
-  
+  //texture(img);
   // send resolution of sketch into shader
   theShader.setUniform('u_resolution', [width, height]);
+  theShader.setUniform('iTime', millis()/1000.);
   theShader.setUniform("iMouse", [mouseX, map(mouseY, 0, height, height, 0)]);
   theShader.setUniform("iFrame", frameCount);
-  theShader.setUniform("iTime", millis()/1000.);
- 
+
   
   // shader() sets the active shader with our shader
   shader(theShader);
-  //model(cubeObj);
+
   // rect gives us some geometry on the screen
   rect(0,0,width, height);
-  
 }
+
