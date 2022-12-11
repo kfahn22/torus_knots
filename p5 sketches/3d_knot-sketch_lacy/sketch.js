@@ -1,24 +1,16 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
+// Coding Train / Daniel Shiffman
+// https://thecodingtrain.com/challenges/87-3d-knots
+// https://youtu.be/r6YMKr1X0VA
 // Javascript transcription: Chuck England
 
-// 3D Knot
-// Video: https://youtu.be/r6YMKr1X0VA
+// Code from challenge: https://editor.p5js.org/codingtrain/sketches/fa1rAWng9
 
 let angle = 0;
-let knot;
-
-let vectors = [];
-// r(beta) = 0.8 + 1.6 * sin(6 * beta)
-// theta(beta) = 2 * beta
-// phi(beta) = 0.6 * pi * sin(12 * beta)
-
-//x = r * cos(phi) * cos(theta)
-//y = r * cos(phi) * sin(theta)
-//z = r * sin(phi)
-
 let beta = 0;
+let knot;
+const l = 30; // determines fineness of lace
+const f = 0.01; // deterine tightness of weave
+let vectors = [];
 
 function setup() {
     createCanvas(800, 450, WEBGL);
@@ -39,18 +31,18 @@ function draw() {
     
     vectors.push(createVector(x, y, z));
 
-    beta += 0.01;
+    //beta += 0.01;
+    beta += f + (TWO_PI / l);
 
     noFill();
-    //stroke(255);
-    strokeWeight(4);
+    strokeWeight(1);
     beginShape();
     for (let i = 0; i < vectors.length; i++) {
         let v = vectors[i];
         let d = v.mag();
         let m = map(v.mag(), min(d), max(d), 0, 255);
         //console.log(d);
-        stroke(255, d, 255);
+        stroke('#ebf9ff');
         vertex(v.x, v.y, v.z);
     }
     endShape();

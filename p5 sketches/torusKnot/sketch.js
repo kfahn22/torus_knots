@@ -43,7 +43,7 @@ function draw() {
     vectors.push(createVector(x, y, z));
 
     beta += 0.01;
-
+    
     noFill();
     strokeWeight(4);
     beginShape();

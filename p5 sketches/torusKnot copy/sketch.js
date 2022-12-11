@@ -18,12 +18,11 @@
 let angle = 0;
 let beta = 0;
 let vectors = [];
-const p = 8;
-const q = 9;
-const sc = 3;
-const l = 10; // determines fineness of lace
-const f = 0.05; // deterine tightness of weave
-let r; // will determine scale of knot
+let p = 3;
+let q = 2;
+let r ; // will determine scale of knot
+let sc = 5;
+let frames = 60;
 
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
@@ -32,9 +31,9 @@ function setup() {
 function draw() {
     background('#701616');
     rotateY(angle);
-    r = 0.05 * height;
+    r = 0.05*height;
     angle += 0.01;
-
+    
     // phi and theta for torus knot
     let phi = p * beta;
     let theta = q * beta;
@@ -44,10 +43,10 @@ function draw() {
     //z = - sin(phi); //results in a plane
     vectors.push(createVector(x, y, z));
 
-    beta += f + (TWO_PI / l);
-   
+    beta += 0.01 + (TWO_PI/ frames);
+
     noFill();
-    strokeWeight(1);
+    strokeWeight(2);
     beginShape();
     for (let i = 0; i < vectors.length; i++) {
         let v = vectors[i];
