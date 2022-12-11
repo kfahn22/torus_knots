@@ -9,7 +9,7 @@ let angle = 0;
 let beta = 0;
 let knot;
 const l = 30; // determines fineness of lace
-const f = 0.01; // deterine tightness of weave
+const f = 0.05; // deterine tightness of weave
 let vectors = [];
 
 function setup() {
@@ -17,7 +17,8 @@ function setup() {
 }
 
 function draw() {
-    background('#0B6A88');
+    //background('#0B6A88');
+    background('#701f2e');
     rotateY(angle);
     angle += 0.03;
 
@@ -42,7 +43,7 @@ function draw() {
         let d = v.mag();
         let m = map(v.mag(), min(d), max(d), 0, 255);
         //console.log(d);
-        stroke('#ebf9ff');
+        stroke('#feee8f');
         vertex(v.x, v.y, v.z);
     }
     endShape();
