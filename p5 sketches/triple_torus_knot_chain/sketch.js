@@ -18,6 +18,7 @@
 let angle = 0;
 let beta = 0;
 let knot;
+let knots = [];
 let p = 9;
 let q = 8;
 let r = 50; // will determine scale of knot
@@ -28,22 +29,30 @@ let oy = 0.3; // affects y position of orbit
 
 function setup() {
     createCanvas(400, 400, WEBGL);
-    // 
-    let x = width*oy; 
-    let y = height*oy; 
-    r = 6;
-    knot = new TorusKnot(x, y, p, q, r, h);
+    colorMode(HSB, 255);
+    angleMode(DEGREES);
+    //r = 6;
+    for (i = 0; i < 10; i++) {
+        oy = 0.01 * random(i);
+        x = width * oy;
+        y = height * oy;
+        r = 4 * i;
+        let c = i * 28; 
+        knots.push(new TorusKnot(x, y, p, q, r, h, c));
+    }
     //heart = new Heart4(x, y, 50);
 }
 
 function draw() {
-    background('#701616');
-    rotateY(angle);
+    background(0);
+
 
     // translate will determine orbit of torus
-    translate(ox, -ox);
-    
-    knot.oneKnot();
-    knot.show();
-    angle += 0.01;
+   // translate(ox, -ox);
+    for (let i = 0; i < knots.length; i++) {
+        rotateY(angle + i/90);
+        knots[i].oneKnot();
+        knots[i].show();
+    }
+    angle += 1;
 }
