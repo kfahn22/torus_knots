@@ -1,53 +1,52 @@
 //https://github.com/anuraghazra/CanvasFun/blob/master/LoveHearts/Heart.js
 
 class TorusKnot {
-    contructor(x=0, y=0, _p, _q, _r, _h) {
+    constructor(_px, _py, _p, _q, _r, _h) {
+        this.beta = 0;
         this.p = _p;
         this.q = _q;
-        this.x = x;
-        this.y = y;
-        this.angle = _angle;
+        this.px = _px;
+        this.py = _py;
         this.r = _r;
         this.h = _h;
-        this.vectors = [];
+        this.points = [];
     }
-    // oneCycle() {
-    //     this.sc += 0.005;
-    //     for (let a = 0; a < PI; a += 0.01) {
-    //         const r = this.sc * pow(sin(a), 7) * pow(e, 2 * a)
-    //         const x = r * cos(a);
-    //         const y = -r * abs(sin(a));
-    //         if (this.beat) {
-    //             this.pulse = map(cos(a), 0, this.pulseRadius, 0.5, -1);
-    //         }
 
-    //         if (this.vectors.length < 500) {
-    //             this.vectors.push(createVector(x, y));
-    //         }
-    //     }
-    // }
     oneKnot() {
-        for (let beta = 0; beta < PI; beta += 0.01) {
-            let phi = this.p * beta;
-            let theta = this.q * beta;
-            const x = this.r * cos(theta) * (this.h + cos(phi));
-            const y = this.r * sin(theta) * (this.h + cos(phi));
-            const z = this.r * sin(phi);
-            if (this.vectors.length < 500) {
-                this.vectors.push(createVector(x, y, z));
+        //for (let beta = 0; beta < 10; beta += 0.9) {
+        for (let beta = 0; beta < 630; beta += 1) {
+            let phi = 8 * (beta * 0.01);
+            let theta = 9 * (beta * 0.01);
+            let x = this.r * cos(theta) * (this.h + cos(phi));
+            let y = this.r * sin(theta) * (this.h + cos(phi));
+            let z = this.r * sin(phi);
+            if (this.points.length < 630) {
+                this.points[beta] = createVector(x, y, z);
+            } else {
+                break;
             }
+
+            console.log(this.points.length);
         }
     }
-    show(angle) {
-        push();
+
+    show() {
         noFill();
         strokeWeight(2);
-        translate(angle + 0.01, angle + 0.01);
+
+        push();
+        translate(this.px, this.py);
         beginShape();
-        for (let i = 0; i < this.vectors.length; i++) {
-            let v = this.vectors[i];
-            stroke('#feee8f');
-            vertex(v.x, v.y, v.z);
+        for (let v of this.points) {
+            //let v = this.points[i];
+            let d = v.mag(); // flips color at d < 51
+            if (d < 51) {
+                stroke('#feee8f');
+                vertex(v.x, v.y, v.z);
+            } else {
+                stroke(255, 255, 255, 50);
+                vertex(v.x, v.y, v.z);
+            }
         }
         endShape();
         pop();
