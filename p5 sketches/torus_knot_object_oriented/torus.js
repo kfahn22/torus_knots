@@ -11,7 +11,7 @@ class TorusKnot {
         this.h = _h;
         this.c = _c;
         this.points = [];
-        this.color = color(_c, 255, 255, _c);
+        this.color = color(_c*0.1, 1, 1, _c*0.1);
     }
 
     oneKnot() {
@@ -32,7 +32,7 @@ class TorusKnot {
 
     show() {
         noFill();
-        strokeWeight(2);
+        strokeWeight(this.c*0.5);
         
         push();
         translate(this.px, this.py);

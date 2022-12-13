@@ -29,15 +29,17 @@ let oy = 0.3; // affects y position of orbit
 
 function setup() {
     createCanvas(400, 400, WEBGL);
-    colorMode(HSB, 255);
+    colorMode(HSB, 1, 1, 1, 1);
     angleMode(DEGREES);
+    blendMode();
+
     //r = 6;
     for (i = 0; i < 10; i++) {
         oy = 0.01 * random(i);
         x = width * oy;
         y = height * oy;
         r = 4 * i;
-        let c = i * 28; 
+        let c = i; 
         knots.push(new TorusKnot(x, y, p, q, r, h, c));
     }
     //heart = new Heart4(x, y, 50);
