@@ -1,0 +1,82 @@
+// Code based on 3D Knot coding challenge
+// Coding Train / Daniel Shiffman
+// https://thecodingtrain.com/challenges/87-3d-knots
+// https://youtu.be/r6YMKr1X0VA
+// Javascript transcription: Chuck England
+
+// Code from challenge: https://editor.p5js.org/codingtrain/sketches/fa1rAWng9
+
+// Equation for Torus knots from
+// https://home.adelphi.edu/~stemkoski/knotgallery/
+
+// Attempt at object oriented approach not working 
+// Note that it is not easy to intuitively figure out how changing 
+// parameters to translate functions affect orbit of torus
+// Torus can easily end up offscreen
+
+// https://github.com/davepagurek/p5.Framebuffer
+
+let angle = 0;
+let beta = 0;
+let knot;
+let knots = [];
+let p = 9;
+let q = 8;
+let r = 50; // will determine scale of knot
+let h = 2;
+let x, y;
+let ox = 50; // as ox increases height/radius of orbit increases 
+let oy = 0.3; // affects y position of orbit
+let blurRenderer;
+let colorOptions = ['#9ad5ca', '#acdde7', '3adb9e3', '#a379c9'];
+
+
+function setup() {
+    createCanvas(600, 600, WEBGL);
+    angleMode(DEGREES);
+    // There's a bug in Firefox where you can only make floating point textures
+    // if they're RGBA, and it breaks if it's just RGB
+    //blurRenderer = createGaussianBlurRenderer()
+    blurRenderer = createBlurRenderer();
+    blurRenderer.setIntensity(0.15)
+    blurRenderer.setSamples(10)
+    blurRenderer.setDof(50)
+
+    //r = 6;
+    for (i = 0; i < 8; i++) {
+        oy = 0.01 * random(i);
+        // x = width * oy;
+        // y = height * oy;
+        x = width * 0.1;
+        y = height * 0.1;
+        r = 2 * i;
+        let c = colorOptions[i % 4];
+        knots.push(new TorusKnot(x, y, p, q, r, h, c));
+    }
+}
+
+function draw() {
+    translate(0, -height/2);
+    blurRenderer.draw(() => {
+        clear();
+        push();
+        background('#b744b8');
+        noStroke();
+        push();
+        translate(-80, -80, -300);
+        blurRenderer.focusHere()
+        pop();
+        push();
+        for (let i = 0; i < knots.length; i++) {
+            //let m = map(i, 0, knots.length, 0, 255);
+            let rand = int(random(4));
+            let col = color(colorOptions[rand]);
+            rotateY(angle + i/90);
+            knots[i].oneKnot();
+            knots[i].show(col);
+            angle +=0.01;
+        }
+        pop();
+        pop();
+    })
+}

@@ -1,7 +1,7 @@
 //https://github.com/anuraghazra/CanvasFun/blob/master/LoveHearts/Heart.js
 
 class TorusKnot {
-    constructor(_px, _py, _p, _q, _r, _h, _c) {
+    constructor(_px, _py, _p, _q, _r, _h) {
         this.beta = 0;
         this.p = _p;
         this.q = _q;
@@ -9,20 +9,18 @@ class TorusKnot {
         this.py = _py;
         this.r = _r;
         this.h = _h;
-        this.c = _c;
         this.points = [];
-        this.color = color(_c*0.1, 1, 1, _c*0.1);
     }
 
     oneKnot() {
-        // 630 when angle mode radians
-        for (let beta = 0; beta < 361; beta += 1) {
-            let phi = 8 * beta;
-            let theta = 9 * beta;
+        //for (let beta = 0; beta < 10; beta += 0.9) {
+        for (let beta = 0; beta < 630; beta += 1) {
+            let phi = 8 * (beta * 0.01);
+            let theta = 9 * (beta * 0.01);
             let x = this.r * cos(theta) * (this.h + cos(phi));
             let y = this.r * sin(theta) * (this.h + cos(phi));
             let z = this.r * sin(phi);
-            if (this.points.length < 361) {
+            if (this.points.length < 630) {
                 this.points[beta] = createVector(x, y, z);
             } else {
                 break;
@@ -31,16 +29,15 @@ class TorusKnot {
     }
 
     show() {
-        fill(this.color);
-        strokeWeight(this.c);
+        noFill();
+        strokeWeight(2);
         
         push();
         translate(this.px, this.py);
         beginShape();
         for (let v of this.points) {
-            stroke(this.color);
-            vertex(v.x, v.y, v.z);
-            // let d = v.mag(); 
+            let d = v.mag(); 
+            stroke(d*360, 255, 255);
             // if (d < 30) {
             //     stroke('#ebf9ff');
             //     vertex(v.x, v.y, v.z);

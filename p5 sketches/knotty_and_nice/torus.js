@@ -1,5 +1,7 @@
 //https://github.com/anuraghazra/CanvasFun/blob/master/LoveHearts/Heart.js
 
+//let colorOptions = ['#9ad5ca', '#acdde7', '3adb9e3', '#a379c9', '#b744b8'];
+
 class TorusKnot {
     constructor(_px, _py, _p, _q, _r, _h, _c) {
         this.beta = 0;
@@ -11,7 +13,8 @@ class TorusKnot {
         this.h = _h;
         this.c = _c;
         this.points = [];
-        this.color = color(_c*0.1, 1, 1, _c*0.1);
+        //this.col = _c;
+        //this.color = color(random(colorOptions));
     }
 
     oneKnot() {
@@ -31,15 +34,19 @@ class TorusKnot {
     }
 
     show() {
-        fill(this.color);
-        strokeWeight(this.c);
+       //noFill();
+        //strokeWeight(this.c*0.5);
         
         push();
-        translate(this.px, this.py);
+       // translate(this.px, this.py);
         beginShape();
         for (let v of this.points) {
-            stroke(this.color);
-            vertex(v.x, v.y, v.z);
+            translate(v.x, v.y, v.z);
+            //fill('#b744b8');
+            let col = color(this.c);
+            fill(col);
+            sphere(this.r);
+           // vertex(v.x, v.y, v.z);
             // let d = v.mag(); 
             // if (d < 30) {
             //     stroke('#ebf9ff');
