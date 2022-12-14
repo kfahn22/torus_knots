@@ -50,6 +50,7 @@ Here I have rendered three different torus knots with different radii.
     margin-left: auto;
     margin-right: auto;" width="800" height="400">
 
+- [Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/knotty_and_nice)
 - [P5 sketch](https://editor.p5js.org/kfahn/sketches/jU4dOOP7X)
 
 ## 2D Mathematical Rose
