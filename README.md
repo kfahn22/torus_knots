@@ -49,9 +49,9 @@ Here I have rendered three different torus knots with different radii.
 In this version, I am rendering multiple tori at the same time and using Dave Pagurek's FrameBuffer library to 
 add blur.
 
-![GIF](https://github.com/kfahn22/torus_knots/tree/main/GIFS/knotty.gif)
-<br>
-<img src="https://github.com/kfahn22/torus_knots/tree/main/GIFS/knotty.gif" width="40" height="40" />
+![](GIFS/knotty.gif)
+<!-- <br>
+<img src="https://github.com/kfahn22/torus_knots/tree/main/GIFS/knotty.gif" width="40" height="40" /> -->
 
 <!-- <img class="img" src="assets/knotty.jpg" alt="Knotty and Nice" style=" display: block;
     margin-left: auto;
