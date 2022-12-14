@@ -44,7 +44,11 @@ Here I have rendered three different torus knots with different radii.
 - [Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/triple_torus_knot)
 - [P5 sketch](https://editor.p5js.org/kfahn/sketches/IpjfsH0X9)
 
-## Knotty and Nice
+## Knotty and Nice Animation
+
+In this version, I am rendering multiple tori at the same time and using Dave Pagurek's FrameBuffer library to 
+add blur.
+
 
 <img class="img" src="assets/knotty.jpg" alt="Knotty and Nice" style=" display: block;
     margin-left: auto;
