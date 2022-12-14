@@ -1,4 +1,4 @@
-//https://github.com/anuraghazra/CanvasFun/blob/master/LoveHearts/Heart.js
+
 
 class TorusKnot {
     constructor(_px, _py, _p, _q, _r, _h) {
@@ -12,6 +12,9 @@ class TorusKnot {
         this.points = [];
     }
 
+    // https://github.com/anuraghazra/CanvasFun/blob/master/LoveHearts/Heart.js
+    // Reference for this function
+    // We need to loop through one torus knot before creating object
     oneKnot() {
         //for (let beta = 0; beta < 10; beta += 0.9) {
         for (let beta = 0; beta < 630; beta += 1) {

@@ -1,7 +1,3 @@
-//https://github.com/anuraghazra/CanvasFun/blob/master/LoveHearts/Heart.js
-
-//let colorOptions = ['#9ad5ca', '#acdde7', '3adb9e3', '#a379c9', '#b744b8'];
-
 class TorusKnot {
     constructor(_px, _py, _p, _q, _r, _h, _c) {
         this.beta = 0;
@@ -13,10 +9,11 @@ class TorusKnot {
         this.h = _h;
         this.c = _c;
         this.points = [];
-        //this.col = _c;
-        //this.color = color(random(colorOptions));
     }
 
+    // https://github.com/anuraghazra/CanvasFun/blob/master/LoveHearts/Heart.js
+    // Reference for this function
+    // We need to loop trhough torus knot before creating object
     oneKnot() {
         // 630 when angle mode radians
         for (let beta = 0; beta < 361; beta += 1) {
@@ -34,15 +31,11 @@ class TorusKnot {
     }
 
     show() {
-       //noFill();
-        //strokeWeight(this.c*0.5);
-        
         push();
        // translate(this.px, this.py);
         beginShape();
         for (let v of this.points) {
             translate(v.x, v.y, v.z);
-            //fill('#b744b8');
             let col = color(this.c);
             fill(col);
             sphere(this.r);

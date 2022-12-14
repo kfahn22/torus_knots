@@ -9,16 +9,10 @@
 // Equation for Torus knots from
 // https://home.adelphi.edu/~stemkoski/knotgallery/
 
-// Attempt at object oriented approach not working 
-// Note that it is not easy to intuitively figure out how changing 
-// parameters to translate functions affect orbit of torus
-// Torus can easily end up offscreen
-
 // https://github.com/davepagurek/p5.Framebuffer
 
 let angle = 0;
 let beta = 0;
-let knot;
 let knots = [];
 let p = 9;
 let q = 8;
