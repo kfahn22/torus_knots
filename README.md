@@ -44,6 +44,14 @@ Here I have rendered three different torus knots with different radii.
 - [Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/triple_torus_knot)
 - [P5 sketch](https://editor.p5js.org/kfahn/sketches/IpjfsH0X9)
 
+## Knotty and Nice
+
+<img class="img" src="assets/knotty.jpg" alt="Knotty and Nice" style=" display: block;
+    margin-left: auto;
+    margin-right: auto;" width="800" height="400">
+
+- [P5 sketch](https://editor.p5js.org/kfahn/sketches/jU4dOOP7X)
+
 ## 2D Mathematical Rose
 
 If `z = -sin(phi)` is used instead of `z = r * sin(phi);`, you get a 2D curve.  If the parameter c
