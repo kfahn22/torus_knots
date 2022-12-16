@@ -21,7 +21,7 @@ let q = 8;
 let r; // will determine scale of knot
 let h = 3;
 let x, y;
-let num = 30;
+let num = 15;
 let amt, mr, mr1;
 let adj;
 let ox = 50; // as ox increases height/radius of orbit increases 
@@ -30,9 +30,9 @@ let blurRenderer;
 let frames = 361;
 
 let colorOptions = [
-    [164, 6, 6],
-    [245, 253, 198],
-    [42, 116, 87] //65,82,31
+    [18, 38, 56],
+    [244,237,234],
+    [176,123,172] 
 ]
 
 function keyPressed() {
@@ -49,8 +49,9 @@ function setup() {
     createCanvas(400, 400, WEBGL);
     angleMode(DEGREES);
     //https://p5js.org/reference/#/p5/blendMode
-    blendMode(SUBTRACT);
-    //blendMode(SCREEN);
+    //blendMode(BLEND);
+    blendMode(REPLACE);
+    //blendMode(SUBTRACT);  not sure why this is not working??
 
     //lights();
     // There's a bug in Firefox where you can only make floating point textures
@@ -102,16 +103,13 @@ function draw() {
             rotateY(angle + i / 90);
             knots[i].oneKnot();
             // use .show() for regular torusknot or .showSphere() for spheres 
-            knots[i].show();
-            //knots[i].showSphere();
+            //knots[i].show();
+            knots[i].showSphere();
             //angle += 0.01;
             angle -= TWO_PI / frames;
         }
         pop();
         pop();
     })
-    // translate(0,height/2,0);
-    // noStroke();
-    // fill(47,191,113);
-    //sphere(5);
+    
 }

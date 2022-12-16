@@ -50,12 +50,6 @@ In this version, I am rendering multiple tori at the same time and using Dave Pa
 add blur.
 
 ![](GIFS/knottyToo.gif)
-<!-- <br>
-<img src="https://github.com/kfahn22/torus_knots/tree/main/GIFS/knotty.gif" width="40" height="40" /> -->
-
-<!-- <img class="img" src="assets/knottyToo.jpg" alt="Knotty and Nice" style=" display: block;
-    margin-left: auto;
-    margin-right: auto;" width="800" height="400"> -->
 
 - [Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/knotty_and_nice)
 - [P5 sketch](https://editor.p5js.org/kfahn/sketches/jU4dOOP7X)

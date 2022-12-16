@@ -49,7 +49,9 @@ function setup() {
     createCanvas(400, 400, WEBGL);
     angleMode(DEGREES);
     //https://p5js.org/reference/#/p5/blendMode
-    blendMode(BLEND);
+    //blendMode(BLEND);
+    blendMode(REPLACE);
+    //blendMode(SUBTRACT);  not sure why this is not working??
 
     //lights();
     // There's a bug in Firefox where you can only make floating point textures
@@ -109,8 +111,5 @@ function draw() {
         pop();
         pop();
     })
-    // translate(0,height/2,0);
-    // noStroke();
-    // fill(47,191,113);
-    //sphere(5);
+    
 }
