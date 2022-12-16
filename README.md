@@ -37,9 +37,11 @@ Example: (8,9) torus knot
 
 Here I have rendered three different torus knots with different radii.
 
-<img class="img" src="assets/torus_xmas.jpg" alt="(8,9) torus knot" style=" display: block;
+![](GIFS/torus_ball.gif)
+
+<!-- <img class="img" src="assets/torus_xmas.jpg" alt="(8,9) torus knot" style=" display: block;
     margin-left: auto;
-    margin-right: auto;" width="800" height="400">
+    margin-right: auto;" width="800" height="400"> -->
 
 - [Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/triple_torus_knot)
 - [P5 sketch](https://editor.p5js.org/kfahn/sketches/IpjfsH0X9)
