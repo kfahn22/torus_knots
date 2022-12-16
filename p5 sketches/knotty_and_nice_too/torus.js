@@ -65,7 +65,7 @@ class TorusKnot {
             let col = color(this.c);
             fill(col);
             sphere(this.r);
-            //cone(this.r, 2*this.r);
+            
         }
         endShape();
         pop();

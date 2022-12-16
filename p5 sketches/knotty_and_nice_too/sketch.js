@@ -19,70 +19,81 @@ let knots = [];
 let p = 9;
 let q = 8;
 let r; // will determine scale of knot
-let h = 4;
+let h = 3;
 let x, y;
-let num = 30;
+let num = 15;
+let amt, mr, mr1;
 let adj;
 let ox = 50; // as ox increases height/radius of orbit increases 
 let oy = 0.3; // affects y position of orbit
 let blurRenderer;
-let colorOptions1 = ['#9ad5ca', '#acdde7', '#3adb9e3', '#a379c9'];
-let colorOptions2 = ['#caf7e2', '#58b09c', '#386150', '#4a442d'];
-let colorOptions3 = ['#fdfffc', '#caf7e2', '#58b09c', '#386150'];
-let colorOptions4 = ['#054a29', '#137547', '#2a9134', '#3fa34d'];
-let colorOptions5 = [
-    [239,45,86],
-    [237,125,58],
-    [140,216,103],
-    [47,191,113], //#363537 for bakckground
+let frames = 361;
+
+let colorOptions = [
+    [164, 6, 6],
+    [245, 253, 198],
+    [42, 116, 87] //65,82,31
 ]
-let colorOptions6 = [
-    [232,215,241],
-    [211,188,204],
-    [161,103,165],
-    [74,48,109],
-    [14,39,60]
-]
+
+function keyPressed() {
+    if (key == "s") {
+        const options = {
+            units: "frames",
+            delay: 0
+        }
+        saveGif("GIF/knotty2.gif", frames, options);
+    }
+}
 
 function setup() {
     createCanvas(400, 400, WEBGL);
     angleMode(DEGREES);
     //https://p5js.org/reference/#/p5/blendMode
     blendMode(BLEND);
-    
+
     //lights();
     // There's a bug in Firefox where you can only make floating point textures
     // if they're RGBA, and it breaks if it's just RGB
     //blurRenderer = createGaussianBlurRenderer()
     blurRenderer = createBlurRenderer();
-    blurRenderer.setIntensity(0.15);
+    blurRenderer.setIntensity(0.25);
     blurRenderer.setSamples(10);
-    blurRenderer.setDof(40);
-    
+    blurRenderer.setDof(10);
+
     for (i = 0; i < num; i++) {
-        oy = 0.01 * random(i);
-        adj = 0.895; 
-        r = i * (1-adj); // for spheres
+        //oy = 0.01 * random(i);
+        adj = 0.895;
+        mr1 = map(i, 0, num, 0, 0.999);
+        //let mr2 = log(i);
+        //r = i * (1 - pow(adj, mr2)); // for spheres
+        //r = i /(1 - mr1); // for spheres
+        r = i * (1 - mr1);
         //r = i; // for torus knots
         //r = i*0.2; //.25
-        let mr = map(r, 0, num, height/2, 2*r);
+
+        mr = map(r, 0, num, height/num, r);
         x = 0;
         y = mr;
-        let c = colorOptions6[i % 4];
+        let from = color(colorOptions[1]);
+        let to = color(colorOptions[2]);
+        amt = i / num;
+        let c = lerpColor(from, to, amt);
+        //let c = colorOptions7[i % 4];
         knots.push(new TorusKnot(x, y, p, q, r, h, c));
     }
 }
 
 function draw() {
-   //translate(0, -height/2, 0); // for regular torus knot
-   translate(0, -height*adj, 0); // for spheres
+    //translate(0,  -50-height/2 * mr1, 0); // -height/2 for regular torus knot
+    translate(0, -height/2, 0); // for spheres
+
     blurRenderer.draw(() => {
         clear();
         push();
-        background(colorOptions6[4]); // colorOptions5
+        background(colorOptions[0]);
         noStroke();
         push();
-        translate(0,-height/4,0);
+        translate(0, -height / 4, 0);
         blurRenderer.focusHere();
         pop();
         push();
@@ -92,13 +103,14 @@ function draw() {
             // use .show() for regular torusknot or .showSphere() for spheres 
             //knots[i].show();
             knots[i].showSphere();
-            angle += 0.01;
+            //angle += 0.01;
+            angle -= TWO_PI / frames;
         }
         pop();
         pop();
     })
-    translate(0,height/2,0);
-    noStroke();
-    fill(47,191,113);
+    // translate(0,height/2,0);
+    // noStroke();
+    // fill(47,191,113);
     //sphere(5);
 }
