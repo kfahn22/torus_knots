@@ -76,8 +76,8 @@ function setup() {
         mr = map(r, 0, num, height/num, r);
         x = 0;
         y = mr;
-        let from = color(colorOptions[1]);
-        let to = color(colorOptions[2]);
+        let from = color(colorOptions8[1]);
+        let to = color(colorOptions8[2]);
         amt = i / num;
         let c = lerpColor(from, to, amt);
         //let c = colorOptions7[i % 4];
@@ -92,7 +92,7 @@ function draw() {
     blurRenderer.draw(() => {
         clear();
         push();
-        background(colorOptions[0]);
+        background(colorOptions8[0]);
         noStroke();
         push();
         translate(0, -height / 4, 0);

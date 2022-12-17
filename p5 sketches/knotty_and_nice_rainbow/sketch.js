@@ -29,21 +29,15 @@ let oy = 0.3; // affects y position of orbit
 let blurRenderer;
 let frames = 361;
 
-let colorOptions1 = [
-    [94,43,255],
-    [243,250,225],
-    [247,246,197],
-    [252,109,171],
-    [192,76,253] 
-]
-
 let colorOptions = [
-    [57,47,90],
-    [248,244,166], //lightest color - yellowish, // 186,123,161 rose
-    [0,206,203], // green
-    [16,152,247], // blue
-    [255,51,102]  // bright pink
-
+    [0,0,0],
+    [255,0,0],
+    [255,127,0],
+    [255,255,0],
+    [0,255,0],
+    [0,0,255],
+    [75,0,130],
+    [143,0,255]
 ]
 
 function keyPressed() {
@@ -83,16 +77,25 @@ function setup() {
         y = mr;
         amt = i / num;
         let c;
-        let one = color(colorOptions1[1]);
-        let two = color(colorOptions1[2]);
-        let three = color(colorOptions1[3]);
-        let four = color(colorOptions1[4]);
-        if (amt < 0.33) {
-            c = lerpColor(one, two, 0.5);
-        } else if (amt > 0.33 & amt < 0.66) {
-            c = lerpColor(two, three, 0.5);
-        } else {
-            c = lerpColor(three, four, 0.5);
+        let one = color(colorOptions[1]);
+        let two = color(colorOptions[2]);
+        let three = color(colorOptions[3]);
+        let four = color(colorOptions[4]);
+        let five = color(colorOptions[5]);
+        let six = color(colorOptions[6]);
+        let seven = color(colorOptions[7]);
+        if (amt < 0.15) {
+            c = lerpColor(one, two, amt);
+        } else if (amt > 0.15 & amt < 0.3) {
+            c = lerpColor(two, three, amt);
+        } else if (amt > 0.3 & amt < 0.45) {
+            c = lerpColor(three, four, amt);
+        } else if (amt > 0.45 & amt < 0.6) {
+            c = lerpColor(four, five, amt);
+        } else if (amt > 0.6 & amt < 0.75) {
+            c = lerpColor(five, six, amt);
+        } else  {
+            c = lerpColor(six, seven, amt);
         }
         
         knots.push(new TorusKnot(x, y, p, q, r, h, c));
@@ -105,7 +108,7 @@ function draw() {
     blurRenderer.draw(() => {
         clear();
         push();
-        background(colorOptions1[0]);
+        background(colorOptions[0]);
         noStroke();
         push();
         translate(0, -height / 4, 0);
