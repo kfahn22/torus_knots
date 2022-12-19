@@ -57,3 +57,48 @@ let colorOptions7 = [
     [137,49,104],  // reddish purple
     [16,152,247] // blue
 ]
+
+let colorOptions8 = [
+    [104,45,99], // maroon
+    [222,239,183], // light greenish-yellow
+    [152,223,175], // mint
+    [95,180,156],  // foam green
+    [65,66,136] // blue
+]
+
+let colorOptions9 = [
+    [2,3,6], // black
+    [54,49,31], // drk greenish grey
+    [255,215,145], // white
+    [167,38,8],  // red
+    [255,215,145] // egg yolk yellow
+]
+
+// blue 
+let colorOptions10 = [
+    [2,3,6], // black
+    [255, 215, 145], // yellow
+    [255, 215, 145], // yellow
+    [39,111,191],  // blue
+    [39,111,191]  // blue
+]
+
+// purple
+let colorOptions11 = [
+    [2,3,6], // black
+    [255, 215, 145], // yellow
+    [255, 215, 145], // yellow
+    [143,57,133],  // purple
+    [143,57,133]  // purple
+]
+
+// greenish
+let colorOptions12 = [
+    [2,3,6], // black
+    [255, 215, 145], // yellow
+    [255, 215, 145], // yellow
+    // [44,165,141],  // green
+    // [44,165,141]  // green
+    [44,165,179],  // green
+    [44,165,179]  // green
+]

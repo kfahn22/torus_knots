@@ -74,16 +74,16 @@ function setup() {
         y = mr;
         amt = i / num;
         let c;
-        let one = color(colorOptions2[1]);
-        let two = color(colorOptions2[2]);
-        let three = color(colorOptions1[3]);
-        let four = color(colorOptions2[4]);
+        let one = color(colorOptions12[1]);
+        let two = color(colorOptions12[2]);
+        let three = color(colorOptions12[3]);
+        let four = color(colorOptions12[4]);
         if (amt < 0.333) {
             c = lerpColor(one, two, 0.5);
         } else if (amt > 0.333 & amt < 0.666) {
             c = lerpColor(two, three, 0.5);
         } else if (amt > 0.66) {
-            c = lerpColor(three, four, 0.5);
+            c = lerpColor(three, four, 0.25);
         }
         
         knots.push(new TorusKnot(x, y, p, q, r, h, c));
@@ -96,7 +96,7 @@ function draw() {
     blurRenderer.draw(() => {
         clear();
         push();
-        background(colorOptions2[0]);
+        background(colorOptions12[0]);
         noStroke();
         push();
         translate(0, -height / 4, 0);
