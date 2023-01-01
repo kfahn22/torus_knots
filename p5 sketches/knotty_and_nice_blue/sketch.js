@@ -29,21 +29,12 @@ let oy = 0.3; // affects y position of orbit
 let blurRenderer;
 let frames = 361;
 
-let colorOptions1 = [
-    [94,43,255],
-    [243,250,225],
-    [247,246,197],
-    [252,109,171],
-    [192,76,253] 
-]
-
 let colorOptions = [
-    [57,47,90],
-    [248,244,166], //lightest color - yellowish, // 186,123,161 rose
-    [0,206,203], // green
-    [16,152,247], // blue
-    [255,51,102]  // bright pink
-
+    [2,3,6], // black
+    [255, 215, 145], // yellow
+    [255, 215, 145], // yellow
+    [39,111,191],  // blue
+    [39,111,191]  // blue
 ]
 
 function keyPressed() {
@@ -83,10 +74,10 @@ function setup() {
         y = mr;
         amt = i / num;
         let c;
-        let one = color(colorOptions1[1]);
-        let two = color(colorOptions1[2]);
-        let three = color(colorOptions1[3]);
-        let four = color(colorOptions1[4]);
+        let one = color(colorOptions[1]);
+        let two = color(colorOptions[2]);
+        let three = color(colorOptions[3]);
+        let four = color(colorOptions[4]);
         if (amt < 0.33) {
             c = lerpColor(one, two, 0.5);
         } else if (amt > 0.33 & amt < 0.66) {
@@ -105,7 +96,7 @@ function draw() {
     blurRenderer.draw(() => {
         clear();
         push();
-        background(colorOptions1[0]);
+        background(colorOptions[0]);
         noStroke();
         push();
         translate(0, -height / 4, 0);

@@ -21,7 +21,7 @@ let q = 8;
 let r; // will determine scale of knot
 let h = 3;
 let x, y;
-let num = 15; // 15 optimum number 
+let num = 10; // 15 optimum number 
 let amt, mr, mr1;
 let adj;
 let ox = 50; // as ox increases height/radius of orbit increases 
@@ -30,11 +30,11 @@ let blurRenderer;
 let frames = 361;
 
 let colorOptions = [
-    [0,0,0],
-    [246,245,174],
-    [241,91,181],
-    [0,187,249],
-    [75,47,200] 
+    [2,3,6], // black
+    [255, 215, 145], // yellow
+    [255, 215, 145], // yellow
+    [39,111,191],  // blue
+    [39,111,191]  // blue
 ]
 
 function keyPressed() {
@@ -74,10 +74,10 @@ function setup() {
         y = mr;
         amt = i / num;
         let c;
-        let one = color(colorOptions12[1]);
-        let two = color(colorOptions12[2]);
-        let three = color(colorOptions12[3]);
-        let four = color(colorOptions12[4]);
+        let one = color(colorOptions[1]);
+        let two = color(colorOptions[2]);
+        let three = color(colorOptions[3]);
+        let four = color(colorOptions[4]);
         if (amt < 0.333) {
             c = lerpColor(one, two, 0.5);
         } else if (amt > 0.333 & amt < 0.666) {
@@ -96,7 +96,7 @@ function draw() {
     blurRenderer.draw(() => {
         clear();
         push();
-        background(colorOptions12[0]);
+        background(colorOptions[0]);
         noStroke();
         push();
         translate(0, -height / 4, 0);

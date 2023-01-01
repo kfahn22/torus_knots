@@ -53,7 +53,7 @@ add blur.
 
 ![](GIFS/knottyToo.gif)
 
-- [Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/knotty_and_nice_too)
+- [Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/knotty_and_nice_xmas)
 - [P5 sketch](https://editor.p5js.org/kfahn/sketches/fx3GllVHp)
 
 ## 2D Mathematical Rose
