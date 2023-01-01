@@ -37,11 +37,14 @@ let colorOptions = [
     [39,111,191]  // blue
 ]
 
+// Daniel Shiffman's short on creating the perfect GIF loop
+// https://www.youtube.com/shorts/CEnfKhs6wLg
+
 function keyPressed() {
     if (key == "s") {
         const options = {
             units: "frames",
-            delay: 0
+            delay: 20
         }
         saveGif("GIF/knotty2.gif", frames, options);
     }

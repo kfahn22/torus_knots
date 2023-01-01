@@ -49,12 +49,12 @@ Here I have rendered three different torus knots with different radii.
 ## Knotty and Nice Animation
 
 In this version, I am rendering multiple tori at the same time and using Dave Pagurek's FrameBuffer library to 
-add blur.
+add blur. Thanks to Daniel Shiffman for his [short](https://www.youtube.com/shorts/CEnfKhs6wLg) showing how to render a perfect GIF loop using the new p5.js saveGif() function.
 
-![](GIFS/knottyToo.gif)
+![](GIFS/GIF_blue.gif)
 
-- [Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/knotty_and_nice_xmas)
-- [P5 sketch](https://editor.p5js.org/kfahn/sketches/fx3GllVHp)
+- [Code](https://github.com/kfahn22/torus_knots/tree/main/p5%20sketches/knotty_and_nice_blue)
+- [P5 sketch](https://editor.p5js.org/kfahn/sketches/yq8kvMGcU)
 
 ## 2D Mathematical Rose
 

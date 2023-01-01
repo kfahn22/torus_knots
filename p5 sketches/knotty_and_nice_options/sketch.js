@@ -27,7 +27,7 @@ let adj;
 let ox = 50; // as ox increases height/radius of orbit increases 
 let oy = 0.3; // affects y position of orbit
 let blurRenderer;
-let frames = 361;
+let frames = 61;
 
 let colorOptions = [
     [2,3,6], // black
@@ -36,6 +36,9 @@ let colorOptions = [
     [39,111,191],  // blue
     [39,111,191]  // blue
 ]
+
+// Daniel Shiffman's short on creating the perfect GIF loop
+// https://www.youtube.com/shorts/CEnfKhs6wLg
 
 function keyPressed() {
     if (key == "s") {
